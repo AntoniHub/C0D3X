@@ -3,6 +3,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
 import time
 
+
 path = Service('Driver/chromedriver.exe')
 driver = webdriver.Chrome(service=path)
 time.sleep(1)
