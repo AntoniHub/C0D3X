@@ -9,6 +9,7 @@ import time
 path = Service('Driver/chromedriver.exe')
 driver = webdriver.Chrome(service=path)
 
+
 #Abrimos la pagina principal de MercadoLibre
 def test_abrirML():
     driver.get('https://mercadolibre.com/')
