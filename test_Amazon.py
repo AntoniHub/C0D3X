@@ -27,6 +27,7 @@ def test_scrollSeeAll():
     seeAll.click()
     time.sleep(1)
 
+
 #Clickeamos ver menos
 def test_seeLess():
     seeLess = driver.find_element(By.XPATH,'/html/body/div[4]/div[2]/div/ul[1]/li[18]/a[2]')
