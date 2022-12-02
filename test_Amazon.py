@@ -2,6 +2,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
 import time
+import selenium
 
 path = Service('Driver/chromedriver.exe')
 driver = webdriver.Chrome(service=path)
