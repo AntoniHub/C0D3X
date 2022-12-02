@@ -1,11 +1,21 @@
+import time
+import pytest
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.chrome.service import Service
-import time
-import selenium
+from selenium.webdriver.common.alert import Alert
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
-path = Service('Driver/chromedriver.exe')
-driver = webdriver.Chrome(service=path)
+
+options = Options()
+options.add_argument('--start-maximized')
+options.add_experimental_option("excludeSwitches", ["enable-automation"])
+options.add_experimental_option('useAutomationExtension', False)
+options.binary_location = 'C:/Program Files/Google/Chrome/Application/chrome.exe'
+dc = DesiredCapabilities.CHROME
+dc['goog:loggingPrefs'] = {'browser':'ALL'}
+driver = webdriver.Chrome(chrome_options=options, executable_path='D:/Drivers/chromedriver.exe', desired_capabilities=dc)
 time.sleep(0.5)
 
 #Abrimos el navegador con la URL
