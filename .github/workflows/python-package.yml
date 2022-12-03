@@ -28,9 +28,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         python -m pip install flake8 pytest selenium
-        python -m pip install chromedriver_installer \
-        --install-option="--chromedriver-version=2.10" \
-        --install-option="--chromedriver-checksums=4fecc99b066cb1a346035bf022607104,058cd8b7b4b9688507701b5e648fd821"
+        python -m pip install chromedriver-autoinstaller
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: Lint with flake8
       run: |
