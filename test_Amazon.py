@@ -7,7 +7,7 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
-
+"""
 options = Options()
 options.add_argument('--start-maximized')
 options.add_experimental_option("excludeSwitches", ["enable-automation"])
@@ -17,6 +17,18 @@ dc = DesiredCapabilities.CHROME
 dc['goog:loggingPrefs'] = {'browser':'ALL'}
 driver = webdriver.Chrome(chrome_options=options, executable_path='D:/Drivers/chromedriver.exe', desired_capabilities=dc)
 time.sleep(0.5)
+""" 
+
+chrome_options.add_argument('--disable-gpu')
+chrome_options.add_argument('--user-data-dir={}'.format(tmp_folder + '/user-data'))
+chrome_options.add_argument('--data-path={}'.format(tmp_folder + '/data-path'))
+chrome_options.add_argument('--homedir={}'.format(tmp_folder))
+chrome_options.add_argument('--disk-cache-dir={}'.format(tmp_folder + '/cache-dir'))
+chrome_options.add_argument('--remote-debugging-port=9222')
+
+chrome_options.binary_location = "/usr/bin/google-chrome"
+driver = webdriver.Chrome(options=chrome_options, executable_path="/usr/local/bin/chromedriver")
+
 
 #Abrimos el navegador con la URL
 def test_openWeb():
