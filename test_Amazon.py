@@ -26,9 +26,9 @@ chrome_options.add_argument('--data-path={}'.format(tmp_folder + '/data-path'))
 chrome_options.add_argument('--homedir={}'.format(tmp_folder))
 chrome_options.add_argument('--disk-cache-dir={}'.format(tmp_folder + '/cache-dir'))
 chrome_options.add_argument('--remote-debugging-port=9222')
+chrome_options.binary_location = "/usr/bin/google-chrome"
 """
 
-chrome_options.binary_location = "/usr/bin/google-chrome"
 driver = webdriver.Chrome(options=chrome_options, executable_path="/usr/local/bin/chromedriver")
 
 
