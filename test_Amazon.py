@@ -9,7 +9,6 @@ from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 
 options = Options()
-"""
 options.add_argument('--start-maximized')
 options.add_experimental_option("excludeSwitches", ["enable-automation"])
 options.add_experimental_option('useAutomationExtension', False)
@@ -18,7 +17,6 @@ dc = DesiredCapabilities.CHROME
 dc['goog:loggingPrefs'] = {'browser':'ALL'}
 driver = webdriver.Chrome(chrome_options=options, executable_path='D:/Drivers/chromedriver.exe', desired_capabilities=dc)
 time.sleep(0.5)
-""" 
 
 chrome_options.add_argument('--disable-gpu')
 chrome_options.add_argument('--user-data-dir={}'.format(tmp_folder + '/user-data'))
