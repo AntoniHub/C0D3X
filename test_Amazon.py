@@ -29,7 +29,7 @@ chrome_options.add_argument('--remote-debugging-port=9222')
 chrome_options.binary_location = "/usr/bin/google-chrome"
 """
 #options=chrome_options, 
-driver = webdriver.Chrome(executable_path="/usr/local/bin/chromedriver")
+#driver = webdriver.Chrome(executable_path="D:/Drivers/chromedriver.exe")
 
 
 #Abrimos el navegador con la URL

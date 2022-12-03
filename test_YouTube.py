@@ -8,6 +8,7 @@ path = Service('Driver/chromedriver.exe')
 driver = webdriver.Chrome(service=path)
 time.sleep(1)
 
+
 #Abrimos el Home de Youtube
 def test_openWeb():
     driver.get('https://www.youtube.com/')

@@ -20,6 +20,7 @@ driver = webdriver.Chrome(chrome_options=options, executable_path='D:/Drivers/ch
 time.sleep(0.5)
 
 
+
 """
 Automatizaremos el Front de Selenium Easy a traves del cual veremos 
 las distintas secciones utilizando las librerias llamadas anteriormente
