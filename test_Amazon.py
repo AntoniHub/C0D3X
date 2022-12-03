@@ -28,8 +28,8 @@ chrome_options.add_argument('--disk-cache-dir={}'.format(tmp_folder + '/cache-di
 chrome_options.add_argument('--remote-debugging-port=9222')
 chrome_options.binary_location = "/usr/bin/google-chrome"
 """
-
-driver = webdriver.Chrome(options=chrome_options, executable_path="/usr/local/bin/chromedriver")
+#options=chrome_options, 
+driver = webdriver.Chrome(executable_path="/usr/local/bin/chromedriver")
 
 
 #Abrimos el navegador con la URL
