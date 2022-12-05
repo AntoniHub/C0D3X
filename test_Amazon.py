@@ -45,7 +45,7 @@ def test_clickSetting():
 
 #Scrolleamos hasta ver all
 def test_scrollSeeAll():
-    seeAll = driver.find_element(By.XPATH,'/html/body/div[2]/div[2]/div/ul[1]/li[18]/a[1]/i')
+    seeAll = driver.find_element(By.XPATH,'/html/body/div[3]/div[2]/div/ul[1]/li[9]/a/div')
     driver.execute_script("arguments[0].scrollIntoView();", seeAll)
     time.sleep(1.5)
     seeAll.click()
@@ -53,14 +53,14 @@ def test_scrollSeeAll():
 
 
 #Clickeamos ver menos
-def test_seeLess():
+"""def test_seeLess():
     seeLess = driver.find_element(By.XPATH,'/html/body/div[2]/div[2]/div/ul[1]/li[18]/a[2]/i')
     seeLess.click()
-    time.sleep(3)
+    time.sleep(3)"""
 
 #Subimos a ELECTRONICOS
 def test_electronics():
-    select = driver.find_element(By.XPATH,'/html/body/div[2]/div[2]/div/ul[1]/li[7]/a/i')
+    select = driver.find_element(By.XPATH,'/html/body/div[3]/div[2]/div/ul[1]/li[7]/a')
     driver.execute_script("arguments[0].scrollIntoView();", select)
     time.sleep(1.5)
     select.click()
