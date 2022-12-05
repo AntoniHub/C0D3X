@@ -1,6 +1,5 @@
 import time
 import pytest
-#import chromedriver_autoinstaller
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.alert import Alert
@@ -57,7 +56,7 @@ def test_scrollSeeAll():
 def test_seeLess():
     seeLess = driver.find_element(By.XPATH,'/html/body/div[4]/div[2]/div/ul[1]/li[18]/a[2]')
     seeLess.click()
-    time.sleep(1)
+    time.sleep(3)
 
 #Subimos a ELECTRONICOS
 def test_electronics():
@@ -65,21 +64,21 @@ def test_electronics():
     driver.execute_script("arguments[0].scrollIntoView();", select)
     time.sleep(1.5)
     select.click()
-    time.sleep(1)
+    time.sleep(3)
 
 #Seleccionamos telefonia
 def test_phone():
     phone = driver.find_element(By.XPATH,'/html/body/div[3]/div[2]/div/ul[5]/li[6]/a')
     phone.click()
-    time.sleep(2)
+    time.sleep(5)
 
 #Abrimos el comboBox
 def test_comboBox():
     combo = driver.find_element(By.XPATH,'/html/body/div[1]/header/div/div[1]/div[2]/div/form/div[2]/div/div/select')
     combo.click()
-    time.sleep(1)
+    time.sleep(3)
     combo.click()
-    time.sleep(1)
+    time.sleep(2)
 
 #Buscamos iPhone
 def test_findIphone():
@@ -88,7 +87,7 @@ def test_findIphone():
     time.sleep(0.5)
     iphone.send_keys('iPhone 13 PRO MAX')
     iphone.submit()
-    time.sleep(1)
+    time.sleep(5)
 
 #CERRAMOS!
 def test_close():
