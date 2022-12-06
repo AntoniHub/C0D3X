@@ -35,21 +35,21 @@ chrome_options.binary_location = "/usr/bin/google-chrome"
 def test_openWeb():
     driver.get('https://www.amazon.com/-/es/')
     driver.maximize_window()
-    time.sleep(1.5)
+    time.sleep(3.5)
 
 #Hacemos click en la configuracion
 def test_clickSetting():
     all = driver.find_element(By.XPATH,'/html/body/div[1]/header/div/div[4]/div[1]/a/i')
     all.click()
-    time.sleep(1)
+    time.sleep(4)
 
 #Scrolleamos hasta ver all
 def test_scrollSeeAll():
     seeAll = driver.find_element(By.XPATH,'/html/body/div[3]/div[2]/div/ul[1]/li[11]/a[1]/div')
     driver.execute_script("arguments[0].scrollIntoView();", seeAll)
-    time.sleep(1.5)
+    time.sleep(2.5)
     seeAll.click()
-    time.sleep(1)
+    time.sleep(4)
 
 
 #Clickeamos ver menos
@@ -78,7 +78,7 @@ def test_comboBox():
     combo.click()
     time.sleep(3)
     combo.click()
-    time.sleep(2)
+    time.sleep(3)
 
 #Buscamos iPhone
 def test_findIphone():
