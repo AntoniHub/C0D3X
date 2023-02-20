@@ -1,4 +1,4 @@
-<h1 align="center"> Cyber Guardian Tests </h1>
+<h1 align="center"> Python Tests </h1>
 
 Automated tests with different technologies.
 
