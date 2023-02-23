@@ -8,7 +8,7 @@ from selenium.webdriver.edge.options import Options
 options = Options()
 options.add_argument('--start-maximized')
 options.binary_location = r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
-driver = webdriver.Edge(executable_path='C:/CyberGuardian/EdgeDriver/msedgedriver.exe', options=options)
+driver = webdriver.Edge(executable_path='C:/AntonioRodriguez/EdgeDriver/msedgedriver.exe', options=options)
 
 
 #Open HomePage
@@ -16,9 +16,9 @@ driver = webdriver.Edge(executable_path='C:/CyberGuardian/EdgeDriver/msedgedrive
 class TestHomePage:
     def test_01_openHome(self):
         """Abrimos el navegador, el ambiente de TEST y maximixamos la ventana"""
-        driver.get('https://es-testing.cyberguardian.tech/home')
+        driver.get('https://antonio-rodriguez.tech')
         driver.maximize_window()
-        assert 'Cyber Guardian' in driver.title
+        assert 'Antonio Rodriguez' in driver.title
         time.sleep(1)
 
         #driver.save_screenshot('image.png')
@@ -69,7 +69,7 @@ class TestLogIn:
         mail = driver.find_element(By.ID,'businessEmail')
         mail.click()
         time.sleep(0.2)
-        mail.send_keys('testcyberguardian@gmail.com')
+        mail.send_keys('abgrodriguezfarias@gmail.com')
         time.sleep(0.2)
 
     #Send password

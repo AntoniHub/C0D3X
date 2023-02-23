@@ -12,7 +12,7 @@ options.add_argument('--incognito')
 options.add_experimental_option("excludeSwitches", ["enable-automation"])
 options.add_experimental_option('useAutomationExtension', False)
 options.binary_location = r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
-driver = webdriver.Edge(executable_path='C:/CyberGuardian/EdgeDriver/msedgedriver.exe', options = options)
+driver = webdriver.Edge(executable_path='C:/ANtonioRodriguez/EdgeDriver/msedgedriver.exe', options = options)
 
 
 """Test E2E de la seccion Exposicion en Internet"""
@@ -21,9 +21,9 @@ driver = webdriver.Edge(executable_path='C:/CyberGuardian/EdgeDriver/msedgedrive
 class TestSetUp:
     def test_01_openHome(self):
         """Abrimos el driver, la web en ambiente de TEST y maximizamos la ventana"""
-        driver.get('https://es-testing.cyberguardian.tech/home')
+        driver.get('https://antonio-rodriguez.tech')
         driver.maximize_window()
-        assert 'Cyber Guardian' in driver.title
+        assert 'Antonio Rodriguez' in driver.title
         time.sleep(1)
 
     # Close configuracion de cookies
@@ -49,7 +49,7 @@ class TestLogIn:
         mail = driver.find_element(By.XPATH,'/html/body/div[1]/div/div[2]/div/div[2]/input')
         mail.click()
         time.sleep(0.2)
-        mail.send_keys('testcyberguardian@gmail.com')
+        mail.send_keys('abgrodriguezfarias@gmail.com')
         time.sleep(0.2)
 
     # Send password
@@ -178,7 +178,7 @@ class TestLeaks:
         buscarEmpleados.send_keys(Keys.BACKSPACE*3)
         time.sleep(1)
 
-        buscarEmpleados.send_keys('Factum')
+        buscarEmpleados.send_keys('Farias')
         time.sleep(1)
         buscarEmpleados.send_keys(Keys.BACKSPACE*2)
         time.sleep(1.5)
@@ -256,7 +256,7 @@ class TestWebSecurity:
 
         """Ingresamos un Dominio WEB"""
         barraBusqueda = driver.find_element(By.ID,'website')
-        barraBusqueda.send_keys('www.CyberGuardian.tech')
+        barraBusqueda.send_keys('www.AntonioRodriguez.tech')
         time.sleep(1.5)
         barraBusqueda.send_keys(Keys.BACKSPACE*22)
         time.sleep(1)
@@ -389,7 +389,7 @@ class TestImpersonations:
         agregarURL.click()
         time.sleep(1)
 
-        agregarURL.send_keys('www.CyberGuardian.tech')
+        agregarURL.send_keys('www.AntonioRodriguez.tech')
         time.sleep(1.5)
 
         agregarURL.clear()
@@ -459,7 +459,7 @@ class TestVendorSecurity:
         nameSupplier.click()
         time.sleep(0.5)
 
-        nameSupplier.send_keys('Factum - CyberGuardian')
+        nameSupplier.send_keys('Antonio - Rodriguez')
         time.sleep(1)
 
         # Hacemos click en el selector para desplegar cada una de las opciones

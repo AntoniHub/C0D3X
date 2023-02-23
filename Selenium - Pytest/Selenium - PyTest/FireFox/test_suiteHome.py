@@ -14,7 +14,7 @@ options.set_preference("browser.download.folderList",2)
 options.set_preference("browser.download.manager.showWhenStarting", False)
 options.set_preference("browser.download.dir","/Data")
 options.set_preference("browser.helperApps.neverAsk.saveToDisk", "application/octet-stream,application/vnd.ms-excel")
-driver = webdriver.Firefox(executable_path='C:/CyberGuardian/GeckoDriver/geckodriver.exe', options=options)
+driver = webdriver.Firefox(executable_path='C:/AntonioRodriguez/GeckoDriver/geckodriver.exe', options=options)
 
 
 #Open HomePage
@@ -24,7 +24,7 @@ class TestHomePage:
         """Se abre el browser en ambiente de TEST, maximiza la ventana y valida encabezado Cyber Guardian en Title"""
         driver.get('https://es-testing.cyberguardian.tech/home')
         driver.maximize_window()
-        assert 'Cyber Guardian' in driver.title
+        assert 'Antonio Rodriguez' in driver.title
         time.sleep(1)
 
     #Close cookies
@@ -73,7 +73,7 @@ class TestViewDemo:
         driver.switch_to.window(driver.window_handles[1])
         time.sleep(0.5)
         #Open video demo
-        driver.get('https://es-testing.cyberguardian.tech/demo')
+        driver.get('https://antonio-rodriguez.tech')
         time.sleep(1.5)
         #Play video
         play = driver.find_element(By.ID,'video')
@@ -100,7 +100,7 @@ class TestFooter:
         time.sleep(1)
         driver.execute_script("window.open('');")
         driver.switch_to.window(driver.window_handles[1])
-        driver.get('https://static.cyberguardian.tech/es/aviso-legal-y-condiciones-de-uso.pdf')
+        driver.get('https://antonio-rodriguez.tech')
         #assert 'aviso-legal-y-condiciones-de-uso.pdf' in driver.title
         time.sleep(1)
 
@@ -110,7 +110,7 @@ class TestFooter:
         time.sleep(1)
         driver.execute_script("window.open('');")
         driver.switch_to.window(driver.window_handles[2])
-        driver.get('https://static.cyberguardian.tech/es/condiciones-generales-de-contratacion.pdf')
+        driver.get('https://antonio-rodriguez.tech')
         #assert 'condiciones-generales-de-contratacion.pdf' in driver.title
         time.sleep(1)
 
@@ -120,7 +120,7 @@ class TestFooter:
         time.sleep(1)
         driver.execute_script("window.open('');")
         driver.switch_to.window(driver.window_handles[3])
-        driver.get('https://static.cyberguardian.tech/es/politica-de-privacidad.pdf')
+        driver.get('https://antonio-rodriguez.tech')
         #assert 'politica-de-privacidad.pdf' in driver.title
         time.sleep(1)
 
@@ -130,7 +130,7 @@ class TestFooter:
         time.sleep(1)
         driver.execute_script("window.open('');")
         driver.switch_to.window(driver.window_handles[4])
-        driver.get('https://static.cyberguardian.tech/es/politica-de-cookies.pdf')
+        driver.get('https://antonio-rodriguez.tech')
         #assert 'politica-de-cookies.pdf' in driver.title
         time.sleep(1)
 

@@ -14,7 +14,7 @@ options.set_preference("browser.download.folderList",2)
 options.set_preference("browser.download.manager.showWhenStarting", False)
 options.set_preference("browser.download.dir","/Data")
 options.set_preference("browser.helperApps.neverAsk.saveToDisk", "application/octet-stream,application/vnd.ms-excel")
-driver = webdriver.Firefox(executable_path='C:/CyberGuardian/GeckoDriver/geckodriver.exe', options=options)
+driver = webdriver.Firefox(executable_path='C:/AntonioRodriguez/GeckoDriver/geckodriver.exe', options=options)
 
 
 
@@ -26,9 +26,9 @@ Regression test E2E /client
 class TestOpenHome:
     def test_01_openHome(self):
         """Abrimos el driver, la web en ambiente de TEST y maximizamos la ventana"""
-        driver.get('https://es-testing.cyberguardian.tech/home')
+        driver.get('https://antonio-rodriguez.tech')
         driver.maximize_window()
-        assert 'Cyber Guardian' in driver.title
+        assert 'Antonio Rodriguez' in driver.title
         time.sleep(1)
 
     # Close configuracion de cookies
@@ -54,7 +54,7 @@ class TestLogIn:
         mail = driver.find_element(By.ID,'businessEmail')
         mail.click()
         time.sleep(0.2)
-        mail.send_keys('testcyberguardian@gmail.com')
+        mail.send_keys('abgrodriguezfarias@gmail.com')
         time.sleep(0.2)
 
     # Send password
@@ -115,7 +115,7 @@ class TestEditUser:
         first.clear()
         time.sleep(0.5)
 
-        first.send_keys('TestFactum')
+        first.send_keys('Antonio')
         time.sleep(0.3)
 
     # Edit input LastName
@@ -127,7 +127,7 @@ class TestEditUser:
         last.clear()
         time.sleep(0.5)
 
-        last.send_keys('PruebaFactum')
+        last.send_keys('Rodriguez')
         time.sleep(0.3)
 
     # Edit input phoneNumber
@@ -197,7 +197,7 @@ class TestPurchase:
         city.clear()
         time.sleep(0.5)
 
-        city.send_keys('Madrid')
+        city.send_keys('Valencia')
         time.sleep(0.3)
 
     # Cancel changes
@@ -262,7 +262,7 @@ class TestEmployees:
         email.clear()
         time.sleep(0.3)
 
-        email.send_keys('TestFactumEmail@factum.com')
+        email.send_keys('abgrodriguezfarias@gmail.com')
         time.sleep(0.3)
 
     # Add Rol

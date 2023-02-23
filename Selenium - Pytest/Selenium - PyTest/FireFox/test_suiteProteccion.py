@@ -13,20 +13,20 @@ options.set_preference("browser.download.folderList",2)
 options.set_preference("browser.download.manager.showWhenStarting", False)
 options.set_preference("browser.download.dir","/Data")
 options.set_preference("browser.helperApps.neverAsk.saveToDisk", "application/octet-stream,application/vnd.ms-excel")
-driver = webdriver.Firefox(executable_path='C:/CyberGuardian/GeckoDriver/geckodriver.exe', options=options)
+driver = webdriver.Firefox(executable_path='C:/AntonioRodriguez/GeckoDriver/geckodriver.exe', options=options)
 
 
 
-"""Test E2E de la seccion Seguridad Interna en la pagina 
-https://es-testing.cyberguardian.tech/client/device-security"""
+"""Test E2E de la seccion Seguridad Interna en la pagina """
+
 
 @pytest.mark.feature("SetUp")
 class TestHomePage:
     def test_01_openHome(self):
         """Abrimos el driver, la web en ambiente de TEST y maximizamos la ventana"""
-        driver.get('https://es-testing.cyberguardian.tech/home')
+        driver.get('https://antonio-rodriguez.tech')
         driver.maximize_window()
-        assert 'Cyber Guardian' in driver.title
+        assert 'Antonio Rodriguez' in driver.title
         time.sleep(1)
 
     # Close configuracion de cookies
@@ -52,7 +52,7 @@ class TestLogIn:
         mail = driver.find_element(By.XPATH,'/html/body/div[1]/div/div[2]/div/div[2]/input')
         mail.click()
         time.sleep(0.2)
-        mail.send_keys('testcyberguardian@gmail.com')
+        mail.send_keys('abgrodriguezfarias@gmail.com')
         time.sleep(0.2)
 
     # Send password

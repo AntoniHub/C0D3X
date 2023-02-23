@@ -10,19 +10,19 @@ options = Options()
 #options.add_experimental_option("excludeSwitches", ["enable-automation"])
 #options.add_experimental_option('useAutomationExtension', False)
 options.binary_location = r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
-driver = webdriver.Edge(executable_path='C:/CyberGuardian/EdgeDriver/msedgedriver.exe', options = options)
+driver = webdriver.Edge(executable_path='C:/AntonioRodriguez/EdgeDriver/msedgedriver.exe', options = options)
 
 
-"""Test E2E de la seccion Seguridad Interna en la pagina 
-https://es-testing.cyberguardian.tech/client/device-security"""
+"""Test E2E de la seccion Seguridad Interna en la pagina """
+
 
 @pytest.mark.feature("SetUp")
 class TestHomePage:
     def test_01_openHome(self):
         """Abrimos el driver, la web en ambiente de TEST y maximizamos la ventana"""
-        driver.get('https://es-testing.cyberguardian.tech/home')
+        driver.get('https://antonio-rodriguez.tech')
         driver.maximize_window()
-        assert 'Cyber Guardian' in driver.title
+        assert 'Antonio Rodriguez' in driver.title
         time.sleep(1)
 
     # Close configuracion de cookies
@@ -48,7 +48,7 @@ class TestLogIn:
         mail = driver.find_element(By.XPATH,'/html/body/div[1]/div/div[2]/div/div[2]/input')
         mail.click()
         time.sleep(0.2)
-        mail.send_keys('testcyberguardian@gmail.com')
+        mail.send_keys('abgrodriguezfarias@gmail.com')
         time.sleep(0.2)
 
     # Send password
