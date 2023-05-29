@@ -1,5 +1,17 @@
 <h1 align="center"> Python Tests </h1>
 
-Automated tests with different technologies.
 
-In each of the directories you will find instructions, initial configuration steps and links of interest for further information/explanation of each of them.
+### Backend tests: 
+* An automated endpoint test circuit is created by making the different calls implemented on them, using the <a href="https://docs.python-requests.org/en/latest/index.html"><i>requests</i></a> library.
+* Sometimes it connects with <a href="https://firebase.google.com/docs/firestore/quickstart?hl=es-419#python"><i>Cloud Firestore</i></a> to be able to take data as unique identifiers to be able to set them in the next call as an environment variable since the response is empty.
+* Being able to delete data created from cloud firestore or using the corresponding endpoint (delete) if applicable.
+&nbsp;
+### Frontend tests:
+* <a href="https://www.selenium.dev/documentation/webdriver/getting_started/"><i>Selenium</i></a> is used as a working framework together with pytest to structure the implemented code
+&nbsp; &nbsp; Among the libraries used: 
+&nbsp; &nbsp; &nbsp; &nbsp; <a href="https://faker.readthedocs.io/en/master/"><i>Faker</i></a>: to generate random data in tests
+&nbsp; &nbsp; &nbsp; &nbsp; <a href="https://www.selenium.dev/selenium/docs/api/py/webdriver/selenium.webdriver.common.desired_capabilities.html"><i>DesiredCapabilities</i></a>: to capture logs
+&nbsp; &nbsp; &nbsp; &nbsp; <a href="https://selenium-python.readthedocs.io/getting-started.html"><i>Other</i></a> Selenium libraries
+&nbsp;
+### Continuous testing
+* <a href="https://www.jenkins.io/"><i>Jenkins</i></a> is used as a continuous integration tool. Create a freestyle project that includes the development branches, a cronjob with the desired runtimes, and a windows console run that sends to the project directory and runs the script.
