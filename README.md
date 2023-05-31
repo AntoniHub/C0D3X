@@ -13,6 +13,7 @@
 <li>&nbsp; &nbsp; &nbsp; &nbsp; <a href="https://www.selenium.dev/selenium/docs/api/py/webdriver/selenium.webdriver.common.desired_capabilities.html"><i>DesiredCapabilities</i></a>: to capture logs </li>
 <li>&nbsp; &nbsp; &nbsp; &nbsp; <a href="https://selenium-python.readthedocs.io/getting-started.html"><i>Other</i></a> Selenium libraries </li>
 &nbsp;
+<li><a href="https://playwright.dev/python/">Playwright</a> used briefly as practice to understand its syntax and operation.</li>
 
 ### Continuous testing
 * <a href="https://www.jenkins.io/"><i>Jenkins</i></a> is used as a continuous integration tool. Create a freestyle project that includes the development branches, a cronjob with the desired runtimes, and a windows console run that sends to the project directory and runs the script.
