@@ -4,13 +4,13 @@ name: Daily Test
 
 on:
   schedule:
-    - cron: '10 7-13/2 * * 1-5'
+    - cron: '0 7-13/1 * * 1-5'
     
   # workflow_dispatch:
 
 jobs:
   test_friday:
-    if: github.event.schedule == '10 7-13/2 * * 1-5'
+    if: github.event.schedule == '0 7-13/1 * * 1-5'
     runs-on: ubuntu-latest
     strategy:
       matrix:
