@@ -4,13 +4,13 @@ name: Daily Test
 
 on:
   schedule:
-    - cron: '0 7-13/1 * * 1-5'
+    - cron: '*/10 * * * 1-5'
     
   # workflow_dispatch:
 
 jobs:
   test_friday:
-    if: github.event.schedule == '0 7-13/1 * * 1-5'
+    if: github.event.schedule == '*/10 * * * 1-5'
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -44,6 +44,98 @@ jobs:
         json: ${{ secrets.ACCOUNT_KEY }}
         dir: "Jenkins-CI"
             
+    - name: Run API Tests
+      run: python -m test_daily
+      
+    - name: Upload report .HTML
+      uses: actions/upload-artifact@v4
+      with:
+        name: api_backend.html
+        path: "Jenkins-CI/daily_test.html"
+        
+    - name: Push .HTML to Repo
+      uses: actions-x/commit@v6
+      with:
+         email: abgrodriguezfarias@gmail.com
+         name: Antonio Rodriguez Farias
+         message: download .HTML to see report
+         branch: master
+         files: .
+         repository: https://github.com/AntoniHub/C0D3X.git
+         token: ${{ secrets.PAT }}
+         force: true
+         directory: "Jenkins-CI"
+
+# Another Exc
+    - name: Run API Tests
+      run: python -m test_daily
+      
+    - name: Upload report .HTML
+      uses: actions/upload-artifact@v4
+      with:
+        name: api_backend.html
+        path: "Jenkins-CI/daily_test.html"
+        
+    - name: Push .HTML to Repo
+      uses: actions-x/commit@v6
+      with:
+         email: abgrodriguezfarias@gmail.com
+         name: Antonio Rodriguez Farias
+         message: download .HTML to see report
+         branch: master
+         files: .
+         repository: https://github.com/AntoniHub/C0D3X.git
+         token: ${{ secrets.PAT }}
+         force: true
+         directory: "Jenkins-CI"
+
+  # Another Exc
+    - name: Run API Tests
+      run: python -m test_daily
+      
+    - name: Upload report .HTML
+      uses: actions/upload-artifact@v4
+      with:
+        name: api_backend.html
+        path: "Jenkins-CI/daily_test.html"
+        
+    - name: Push .HTML to Repo
+      uses: actions-x/commit@v6
+      with:
+         email: abgrodriguezfarias@gmail.com
+         name: Antonio Rodriguez Farias
+         message: download .HTML to see report
+         branch: master
+         files: .
+         repository: https://github.com/AntoniHub/C0D3X.git
+         token: ${{ secrets.PAT }}
+         force: true
+         directory: "Jenkins-CI"
+
+  # Another Exc
+    - name: Run API Tests
+      run: python -m test_daily
+      
+    - name: Upload report .HTML
+      uses: actions/upload-artifact@v4
+      with:
+        name: api_backend.html
+        path: "Jenkins-CI/daily_test.html"
+        
+    - name: Push .HTML to Repo
+      uses: actions-x/commit@v6
+      with:
+         email: abgrodriguezfarias@gmail.com
+         name: Antonio Rodriguez Farias
+         message: download .HTML to see report
+         branch: master
+         files: .
+         repository: https://github.com/AntoniHub/C0D3X.git
+         token: ${{ secrets.PAT }}
+         force: true
+         directory: "Jenkins-CI"
+
+  # Another Exc
     - name: Run API Tests
       run: python -m test_daily
       
