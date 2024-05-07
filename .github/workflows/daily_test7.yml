@@ -1,0 +1,68 @@
+# This workflow will install Python dependencies, run tests and lint with a single version of Python
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
+name: Daily Test7
+
+on:
+  schedule:
+    - cron: '*/15 * * * 1-5'
+    
+  # workflow_dispatch:
+
+jobs:
+  test_friday:
+    if: github.event.schedule == '*/15 * * * 1-5'
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.10"]
+    defaults:
+      run:
+        working-directory: "Jenkins-CI"
+    env:
+      API_KEY: ${{ secrets.API_KEY }}
+
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ matrix.python-version }}
+        
+    - name: Install Python dependencies
+      uses: py-actions/py-dependency-install@v4
+      with:
+        update-pip: "true"
+        update-setuptools: "true"
+        update-wheel: "true"
+        path: "Jenkins-CI/requirements.txt"
+      
+    - name: Config ServiceAccountKey.json
+      uses: jsdaniell/create-json@v1.2.3
+      with:
+        name: "serviceAccountKey.json"
+        json: ${{ secrets.ACCOUNT_KEY }}
+        dir: "Jenkins-CI"
+            
+    - name: Run API Tests
+      run: python -m test_daily
+      
+    - name: Upload report .HTML
+      uses: actions/upload-artifact@v4
+      with:
+        name: api_backend.html
+        path: "Jenkins-CI/daily_test.html"
+        
+    - name: Push .HTML to Repo
+      uses: actions-x/commit@v6
+      with:
+         email: abgrodriguezfarias@gmail.com
+         name: Antonio Rodriguez Farias
+         message: download .HTML to see report
+         branch: master
+         files: .
+         repository: https://github.com/AntoniHub/C0D3X.git
+         token: ${{ secrets.PAT }}
+         force: true
+         directory: "Jenkins-CI"
+         
