@@ -64,7 +64,17 @@ jobs:
          repository: https://github.com/AntoniHub/C0D3X.git
          token: ${{ secrets.PAT }}
          force: true
-         directory: "Jenkins-CI"
+         directory: |
+          - "Jenkins-CI"
+          - "Jenkins-CI/test/t1"
+          - "Jenkins-CI/test/t2"
+          - "Jenkins-CI/test/t3"
+          - "Jenkins-CI/test/t5"
+          - "Jenkins-CI/test/t6"
+          - "Jenkins-CI/test/t7"
+          - "Jenkins-CI/test/t8"
+          - "Jenkins-CI/test/t9"
+          - "Jenkins-CI/test/t10"
 
     - name: Create Issue
       uses: imjohnbo/issue-bot@v3
@@ -76,6 +86,7 @@ jobs:
 
           🚀 About me
           Software QA Engineer with experience in Frontend, Backend, Continuous Integration, Databases (SQL and NoSQL), UX/UI, Mobile, Architecture, Linux / macOS / Windows testing.
+          
           📊 Master Degree in Big Data - Catholic University of Avila
           🔒 Post Graduate Diploma in Defensive Cybersecurity
           💡 Diploma in Machine Learning | AI applied to Business
@@ -89,193 +100,13 @@ jobs:
         pinned: false
         token: ${{ secrets.PAT }}
 
-    - name: Upload report .HTML
-      uses: actions/upload-artifact@v4
-      with:
-        name: api_backend.html
-        path: "Jenkins-CI/daily_test.html"
-    - name: Push .HTML to t1
-      uses: actions-x/commit@v6
-      with:
-         email: abgrodriguezfarias@gmail.com
-         name: Antonio Rodriguez Farias
-         message: download .HTML to see report
-         branch: master
-         files: .
-         repository: https://github.com/AntoniHub/C0D3X.git
-         token: ${{ secrets.PAT }}
-         force: true
-         directory: "Jenkins-CI/test/t1"
+    - name: pull-request
+      run: |
+        gh_pr_up() { gh pr create $* || gh pr edit $* }
+        gh_pr_up --title "Antonio Rodriguez Farias" --body "QA Engineer" --assignee @me 
 
-    - name: Upload report .HTML
-      uses: actions/upload-artifact@v4
-      with:
-        name: api_backend.html
-        path: "Jenkins-CI/daily_test.html"
-    - name: Push .HTML to t2
-      uses: actions-x/commit@v6
-      with:
-         email: abgrodriguezfarias@gmail.com
-         name: Antonio Rodriguez Farias
-         message: download .HTML to see report
-         branch: master
-         files: .
-         repository: https://github.com/AntoniHub/C0D3X.git
-         token: ${{ secrets.PAT }}
-         force: true
-         directory: "Jenkins-CI/test/t2"
-
-    - name: Upload report .HTML
-      uses: actions/upload-artifact@v4
-      with:
-        name: api_backend.html
-        path: "Jenkins-CI/daily_test.html"
-    - name: Push .HTML to t3
-      uses: actions-x/commit@v6
-      with:
-         email: abgrodriguezfarias@gmail.com
-         name: Antonio Rodriguez Farias
-         message: download .HTML to see report
-         branch: master
-         files: .
-         repository: https://github.com/AntoniHub/C0D3X.git
-         token: ${{ secrets.PAT }}
-         force: true
-         directory: "Jenkins-CI/test/t3"
-
-    - name: Upload report .HTML
-      uses: actions/upload-artifact@v4
-      with:
-        name: api_backend.html
-        path: "Jenkins-CI/daily_test.html"
-    - name: Push .HTML to t4
-      uses: actions-x/commit@v6
-      with:
-         email: abgrodriguezfarias@gmail.com
-         name: Antonio Rodriguez Farias
-         message: download .HTML to see report
-         branch: master
-         files: .
-         repository: https://github.com/AntoniHub/C0D3X.git
-         token: ${{ secrets.PAT }}
-         force: true
-         directory: "Jenkins-CI/test/t4"
-
-    - name: Upload report .HTML
-      uses: actions/upload-artifact@v4
-      with:
-        name: api_backend.html
-        path: "Jenkins-CI/daily_test.html"
-    - name: Push .HTML to t5
-      uses: actions-x/commit@v6
-      with:
-         email: abgrodriguezfarias@gmail.com
-         name: Antonio Rodriguez Farias
-         message: download .HTML to see report
-         branch: master
-         files: .
-         repository: https://github.com/AntoniHub/C0D3X.git
-         token: ${{ secrets.PAT }}
-         force: true
-         directory: "Jenkins-CI/test/t5"
-
-    - name: Upload report .HTML
-      uses: actions/upload-artifact@v4
-      with:
-        name: api_backend.html
-        path: "Jenkins-CI/daily_test.html"
-    - name: Push .HTML to t6
-      uses: actions-x/commit@v6
-      with:
-         email: abgrodriguezfarias@gmail.com
-         name: Antonio Rodriguez Farias
-         message: download .HTML to see report
-         branch: master
-         files: .
-         repository: https://github.com/AntoniHub/C0D3X.git
-         token: ${{ secrets.PAT }}
-         force: true
-         directory: "Jenkins-CI/test/t6"
-
-    - name: Upload report .HTML
-      uses: actions/upload-artifact@v4
-      with:
-        name: api_backend.html
-        path: "Jenkins-CI/daily_test.html"
-    - name: Push .HTML to t7
-      uses: actions-x/commit@v6
-      with:
-         email: abgrodriguezfarias@gmail.com
-         name: Antonio Rodriguez Farias
-         message: download .HTML to see report
-         branch: master
-         files: .
-         repository: https://github.com/AntoniHub/C0D3X.git
-         token: ${{ secrets.PAT }}
-         force: true
-         directory: "Jenkins-CI/test/t7"
-
-    - name: Upload report .HTML
-      uses: actions/upload-artifact@v4
-      with:
-        name: api_backend.html
-        path: "Jenkins-CI/daily_test.html"
-    - name: Push .HTML to t8
-      uses: actions-x/commit@v6
-      with:
-         email: abgrodriguezfarias@gmail.com
-         name: Antonio Rodriguez Farias
-         message: download .HTML to see report
-         branch: master
-         files: .
-         repository: https://github.com/AntoniHub/C0D3X.git
-         token: ${{ secrets.PAT }}
-         force: true
-         directory: "Jenkins-CI/test/t8"
-
-    - name: Upload report .HTML
-      uses: actions/upload-artifact@v4
-      with:
-        name: api_backend.html
-        path: "Jenkins-CI/daily_test.html"
-    - name: Push .HTML to t9
-      uses: actions-x/commit@v6
-      with:
-         email: abgrodriguezfarias@gmail.com
-         name: Antonio Rodriguez Farias
-         message: download .HTML to see report
-         branch: master
-         files: .
-         repository: https://github.com/AntoniHub/C0D3X.git
-         token: ${{ secrets.PAT }}
-         force: true
-         directory: "Jenkins-CI/test/t9"
-
-    - name: Upload report .HTML
-      uses: actions/upload-artifact@v4
-      with:
-        name: api_backend.html
-        path: "Jenkins-CI/daily_test.html"
-    - name: Push .HTML to t10
-      uses: actions-x/commit@v6
-      with:
-         email: abgrodriguezfarias@gmail.com
-         name: Antonio Rodriguez Farias
-         message: download .HTML to see report
-         branch: master
-         files: .
-         repository: https://github.com/AntoniHub/C0D3X.git
-         token: ${{ secrets.PAT }}
-         force: true
-         directory: "Jenkins-CI/test/t10"
-
-
+        
 # For Pull Request
-    - name: Upload report .HTML
-      uses: actions/upload-artifact@v4
-      with:
-        name: api_backend.html
-        path: "Jenkins-CI/daily_test.html"
     - name: Push .HTML to Repo
       uses: actions-x/commit@v6
       with:
