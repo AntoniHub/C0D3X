@@ -69,12 +69,12 @@ jobs:
     - name: Create Issue
       uses: imjohnbo/issue-bot@v3
       with:
-          assignees: "AntoniHub"
-          labels: "documentation"
-          issue_title: "automated-issue"
-          issue_body: |
-            automated-issue
-          token: ${{ secrets.PAT }}
+        assignees: "AntoniHub"
+        title: Antonio Rodriguez Farias
+        body: |-
+          :wave: Hi, {{#each assignees}}@{{this}}{{#unless @last}}, {{/unless}}{{/each}}!
+        pinned: false
+        token: ${{ secrets.PAT }}
 
 
 # For Pull Request
