@@ -86,6 +86,30 @@ jobs:
           📌 Backend Testing with Pytest, SQL & NoSQL
           📌 Linux Testing with Vagrant & VirtualBox
           📌 Mobile Testing with Android SDK & iOS
-          📝 I write in depth on my website about myself [rodriguezfarias.com](https://rodriguezfarias.com/)
+          📝 I write in depth on my website about myself rodriguezfarias.com
         pinned: false
         token: ${{ secrets.PAT }}
+
+# For Pull Request
+    - name: Push .HTML to Repo
+      uses: actions-x/commit@v6
+      with:
+        email: abgrodriguezfarias@gmail.com
+        name: Antonio Rodriguez Farias
+        message: download .HTML to see report
+        branch: test
+        files: daily_test.html
+        repository: https://github.com/AntoniHub/C0D3X.git
+        token: ${{ secrets.PAT }}
+        force: true
+        directory: "Jenkins-CI"
+
+    - name: Create Pull Request
+      uses: repo-sync/pull-request@v2
+      with:
+        destination_branch: "master"
+        source_branch: "test"
+        github_token: ${{ secrets.PAT }}
+        pr_title: "Test"
+        pr_body: "Test"
+        pr_label: "autoumated-pr"
