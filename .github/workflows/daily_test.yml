@@ -90,11 +90,6 @@ jobs:
         pinned: false
         token: ${{ secrets.PAT }}
 
-    - name: pull-request
-      run: |
-        gh_pr_up() { gh pr create $* || gh pr edit $* }
-        gh_pr_up --title "Antonio Rodriguez Farias" --body "QA Engineer" --assignee @me 
-
 # For Pull Request
     - name: Push .HTML to Repo
       uses: actions-x/commit@v6
