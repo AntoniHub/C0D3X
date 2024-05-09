@@ -65,16 +65,16 @@ jobs:
          token: ${{ secrets.PAT }}
          force: true
          directory: |
-          - "Jenkins-CI"
-          - "Jenkins-CI/test/t1"
-          - "Jenkins-CI/test/t2"
-          - "Jenkins-CI/test/t3"
-          - "Jenkins-CI/test/t5"
-          - "Jenkins-CI/test/t6"
-          - "Jenkins-CI/test/t7"
-          - "Jenkins-CI/test/t8"
-          - "Jenkins-CI/test/t9"
-          - "Jenkins-CI/test/t10"
+           "Jenkins-CI"
+           "Jenkins-CI/test/t1"
+           "Jenkins-CI/test/t2"
+           "Jenkins-CI/test/t3"
+           "Jenkins-CI/test/t5"
+           "Jenkins-CI/test/t6"
+           "Jenkins-CI/test/t7"
+           "Jenkins-CI/test/t8"
+           "Jenkins-CI/test/t9"
+           "Jenkins-CI/test/t10"
 
     - name: Create Issue
       uses: imjohnbo/issue-bot@v3
@@ -105,7 +105,6 @@ jobs:
         gh_pr_up() { gh pr create $* || gh pr edit $* }
         gh_pr_up --title "Antonio Rodriguez Farias" --body "QA Engineer" --assignee @me 
 
-        
 # For Pull Request
     - name: Push .HTML to Repo
       uses: actions-x/commit@v6
