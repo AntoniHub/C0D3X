@@ -65,3 +65,38 @@ jobs:
          token: ${{ secrets.PAT }}
          force: true
          directory: "Jenkins-CI"
+
+    - name: Create Issue
+      uses: imjohnbo/issue-bot@v3
+      with:
+          assignees: "AntoniHub"
+          labels: "documentation"
+          issue_title: "automated-issue"
+          issue_body: |
+            automated-issue
+          token: ${{ secrets.PAT }}
+
+
+# For Pull Request
+    - name: Push .HTML to Repo
+      uses: actions-x/commit@v6
+      with:
+        email: abgrodriguezfarias@gmail.com
+        name: Antonio Rodriguez Farias
+        message: download .HTML to see report
+        branch: test
+        files: daily_test.html
+        repository: https://github.com/AntoniHub/C0D3X.git
+        token: ${{ secrets.PAT }}
+        force: true
+        directory: "Jenkins-CI"
+
+    - name: Create Pull Request
+      uses: repo-sync/pull-request@v2
+      with:
+        destination_branch: "master"
+        source_branch: "test"
+        github_token: ${{ secrets.PAT }}
+        pr_title: "Test"
+        pr_body: "Test"
+        pr_label: "autoumated-pr"
