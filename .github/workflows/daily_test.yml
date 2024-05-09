@@ -89,6 +89,136 @@ jobs:
         pinned: false
         token: ${{ secrets.PAT }}
 
+    - name: Push .HTML to t1
+      uses: actions-x/commit@v6
+      with:
+         email: abgrodriguezfarias@gmail.com
+         name: Antonio Rodriguez Farias
+         message: download .HTML to see report
+         branch: master
+         files: .
+         repository: https://github.com/AntoniHub/C0D3X.git
+         token: ${{ secrets.PAT }}
+         force: true
+         directory: "Jenkins-CI/test/t1"
+
+    - name: Push .HTML to t2
+      uses: actions-x/commit@v6
+      with:
+         email: abgrodriguezfarias@gmail.com
+         name: Antonio Rodriguez Farias
+         message: download .HTML to see report
+         branch: master
+         files: .
+         repository: https://github.com/AntoniHub/C0D3X.git
+         token: ${{ secrets.PAT }}
+         force: true
+         directory: "Jenkins-CI/test/t2"
+
+    - name: Push .HTML to t3
+      uses: actions-x/commit@v6
+      with:
+         email: abgrodriguezfarias@gmail.com
+         name: Antonio Rodriguez Farias
+         message: download .HTML to see report
+         branch: master
+         files: .
+         repository: https://github.com/AntoniHub/C0D3X.git
+         token: ${{ secrets.PAT }}
+         force: true
+         directory: "Jenkins-CI/test/t3"
+
+    - name: Push .HTML to t4
+      uses: actions-x/commit@v6
+      with:
+         email: abgrodriguezfarias@gmail.com
+         name: Antonio Rodriguez Farias
+         message: download .HTML to see report
+         branch: master
+         files: .
+         repository: https://github.com/AntoniHub/C0D3X.git
+         token: ${{ secrets.PAT }}
+         force: true
+         directory: "Jenkins-CI/test/t4"
+
+    - name: Push .HTML to t5
+      uses: actions-x/commit@v6
+      with:
+         email: abgrodriguezfarias@gmail.com
+         name: Antonio Rodriguez Farias
+         message: download .HTML to see report
+         branch: master
+         files: .
+         repository: https://github.com/AntoniHub/C0D3X.git
+         token: ${{ secrets.PAT }}
+         force: true
+         directory: "Jenkins-CI/test/t5"
+
+    - name: Push .HTML to t6
+      uses: actions-x/commit@v6
+      with:
+         email: abgrodriguezfarias@gmail.com
+         name: Antonio Rodriguez Farias
+         message: download .HTML to see report
+         branch: master
+         files: .
+         repository: https://github.com/AntoniHub/C0D3X.git
+         token: ${{ secrets.PAT }}
+         force: true
+         directory: "Jenkins-CI/test/t6"
+
+    - name: Push .HTML to t7
+      uses: actions-x/commit@v6
+      with:
+         email: abgrodriguezfarias@gmail.com
+         name: Antonio Rodriguez Farias
+         message: download .HTML to see report
+         branch: master
+         files: .
+         repository: https://github.com/AntoniHub/C0D3X.git
+         token: ${{ secrets.PAT }}
+         force: true
+         directory: "Jenkins-CI/test/t7"
+
+    - name: Push .HTML to t8
+      uses: actions-x/commit@v6
+      with:
+         email: abgrodriguezfarias@gmail.com
+         name: Antonio Rodriguez Farias
+         message: download .HTML to see report
+         branch: master
+         files: .
+         repository: https://github.com/AntoniHub/C0D3X.git
+         token: ${{ secrets.PAT }}
+         force: true
+         directory: "Jenkins-CI/test/t8"
+
+    - name: Push .HTML to t9
+      uses: actions-x/commit@v6
+      with:
+         email: abgrodriguezfarias@gmail.com
+         name: Antonio Rodriguez Farias
+         message: download .HTML to see report
+         branch: master
+         files: .
+         repository: https://github.com/AntoniHub/C0D3X.git
+         token: ${{ secrets.PAT }}
+         force: true
+         directory: "Jenkins-CI/test/t9"
+
+    - name: Push .HTML to t10
+      uses: actions-x/commit@v6
+      with:
+         email: abgrodriguezfarias@gmail.com
+         name: Antonio Rodriguez Farias
+         message: download .HTML to see report
+         branch: master
+         files: .
+         repository: https://github.com/AntoniHub/C0D3X.git
+         token: ${{ secrets.PAT }}
+         force: true
+         directory: "Jenkins-CI/test/t10"
+
 
 # For Pull Request
     - name: Push .HTML to Repo
