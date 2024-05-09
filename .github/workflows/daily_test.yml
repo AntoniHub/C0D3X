@@ -89,6 +89,11 @@ jobs:
         pinned: false
         token: ${{ secrets.PAT }}
 
+    - name: Upload report .HTML
+      uses: actions/upload-artifact@v4
+      with:
+        name: api_backend.html
+        path: "Jenkins-CI/daily_test.html"
     - name: Push .HTML to t1
       uses: actions-x/commit@v6
       with:
@@ -102,6 +107,11 @@ jobs:
          force: true
          directory: "Jenkins-CI/test/t1"
 
+    - name: Upload report .HTML
+      uses: actions/upload-artifact@v4
+      with:
+        name: api_backend.html
+        path: "Jenkins-CI/daily_test.html"
     - name: Push .HTML to t2
       uses: actions-x/commit@v6
       with:
@@ -115,6 +125,11 @@ jobs:
          force: true
          directory: "Jenkins-CI/test/t2"
 
+    - name: Upload report .HTML
+      uses: actions/upload-artifact@v4
+      with:
+        name: api_backend.html
+        path: "Jenkins-CI/daily_test.html"
     - name: Push .HTML to t3
       uses: actions-x/commit@v6
       with:
@@ -128,6 +143,11 @@ jobs:
          force: true
          directory: "Jenkins-CI/test/t3"
 
+    - name: Upload report .HTML
+      uses: actions/upload-artifact@v4
+      with:
+        name: api_backend.html
+        path: "Jenkins-CI/daily_test.html"
     - name: Push .HTML to t4
       uses: actions-x/commit@v6
       with:
@@ -141,6 +161,11 @@ jobs:
          force: true
          directory: "Jenkins-CI/test/t4"
 
+    - name: Upload report .HTML
+      uses: actions/upload-artifact@v4
+      with:
+        name: api_backend.html
+        path: "Jenkins-CI/daily_test.html"
     - name: Push .HTML to t5
       uses: actions-x/commit@v6
       with:
@@ -154,6 +179,11 @@ jobs:
          force: true
          directory: "Jenkins-CI/test/t5"
 
+    - name: Upload report .HTML
+      uses: actions/upload-artifact@v4
+      with:
+        name: api_backend.html
+        path: "Jenkins-CI/daily_test.html"
     - name: Push .HTML to t6
       uses: actions-x/commit@v6
       with:
@@ -167,6 +197,11 @@ jobs:
          force: true
          directory: "Jenkins-CI/test/t6"
 
+    - name: Upload report .HTML
+      uses: actions/upload-artifact@v4
+      with:
+        name: api_backend.html
+        path: "Jenkins-CI/daily_test.html"
     - name: Push .HTML to t7
       uses: actions-x/commit@v6
       with:
@@ -180,6 +215,11 @@ jobs:
          force: true
          directory: "Jenkins-CI/test/t7"
 
+    - name: Upload report .HTML
+      uses: actions/upload-artifact@v4
+      with:
+        name: api_backend.html
+        path: "Jenkins-CI/daily_test.html"
     - name: Push .HTML to t8
       uses: actions-x/commit@v6
       with:
@@ -193,6 +233,11 @@ jobs:
          force: true
          directory: "Jenkins-CI/test/t8"
 
+    - name: Upload report .HTML
+      uses: actions/upload-artifact@v4
+      with:
+        name: api_backend.html
+        path: "Jenkins-CI/daily_test.html"
     - name: Push .HTML to t9
       uses: actions-x/commit@v6
       with:
@@ -206,6 +251,11 @@ jobs:
          force: true
          directory: "Jenkins-CI/test/t9"
 
+    - name: Upload report .HTML
+      uses: actions/upload-artifact@v4
+      with:
+        name: api_backend.html
+        path: "Jenkins-CI/daily_test.html"
     - name: Push .HTML to t10
       uses: actions-x/commit@v6
       with:
@@ -221,6 +271,11 @@ jobs:
 
 
 # For Pull Request
+    - name: Upload report .HTML
+      uses: actions/upload-artifact@v4
+      with:
+        name: api_backend.html
+        path: "Jenkins-CI/daily_test.html"
     - name: Push .HTML to Repo
       uses: actions-x/commit@v6
       with:
