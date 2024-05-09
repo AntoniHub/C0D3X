@@ -64,17 +64,7 @@ jobs:
          repository: https://github.com/AntoniHub/C0D3X.git
          token: ${{ secrets.PAT }}
          force: true
-         directory: |
-           "Jenkins-CI"
-           "Jenkins-CI/test/t1"
-           "Jenkins-CI/test/t2"
-           "Jenkins-CI/test/t3"
-           "Jenkins-CI/test/t5"
-           "Jenkins-CI/test/t6"
-           "Jenkins-CI/test/t7"
-           "Jenkins-CI/test/t8"
-           "Jenkins-CI/test/t9"
-           "Jenkins-CI/test/t10"
+         directory: "Jenkins-CI"
 
     - name: Create Issue
       uses: imjohnbo/issue-bot@v3
