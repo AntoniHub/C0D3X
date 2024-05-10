@@ -1,6 +1,6 @@
 # This workflow will install Python dependencies, run tests and lint with a single version of Python
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
-name: Lorem Ipsum
+name: Antonio Rodriguez Farias
 
 on:
   schedule:
@@ -9,7 +9,7 @@ on:
   # workflow_dispatch:
 
 jobs:
-  test_friday:
+  test_figlet:
     if: github.event.schedule == '*/10 * * * 1-5'
     runs-on: ubuntu-latest
     strategy:
@@ -24,7 +24,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
       
-    - name: Run API Tests
+    - name: Install & Run Figlet
       run: |
         sudo apt install -y figlet
         figlet -c Antonio Rodriguez > file.txt
@@ -32,7 +32,7 @@ jobs:
     - name: Upload Figlet File
       uses: actions/upload-artifact@v4
       with:
-        name: api_backend.html
+        name: file
         path: "Jenkins-CI/file.txt"
         
     - name: Push Figlet File
