@@ -9,7 +9,7 @@ on:
   # workflow_dispatch:
 
 jobs:
-  test_friday:
+  test_figlet:
     if: github.event.schedule == '*/15 * * * 1-5'
     runs-on: ubuntu-latest
     strategy:
@@ -23,49 +23,31 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v5
-      with:
-        python-version: ${{ matrix.python-version }}
-        
-    - name: Install Python dependencies
-      uses: py-actions/py-dependency-install@v4
-      with:
-        update-pip: "true"
-        update-setuptools: "true"
-        update-wheel: "true"
-        path: "Jenkins-CI/requirements.txt"
       
-    - name: Config ServiceAccountKey.json
-      uses: jsdaniell/create-json@v1.2.3
-      with:
-        name: "serviceAccountKey.json"
-        json: ${{ secrets.ACCOUNT_KEY }}
-        dir: "Jenkins-CI"
-            
-    - name: Run API Tests
-      run: python -m test_daily
+    - name: Install & Run Figlet
+      run: |
+        sudo apt install -y figlet
+        figlet -c Antonio Rodriguez > file.txt
       
-    - name: Upload report .HTML
+    - name: Upload Figlet File
       uses: actions/upload-artifact@v4
       with:
-        name: api_backend.html
-        path: "Jenkins-CI/daily_test.html"
+        name: file
+        path: "Jenkins-CI/file.txt"
         
-    - name: Push .HTML to Repo
+    - name: Push Figlet File
       uses: actions-x/commit@v6
       with:
          email: abgrodriguezfarias@gmail.com
          name: Antonio Rodriguez Farias
-         message: download .HTML to see report
+         message: Antonio Rodriguez Farias
          branch: master
-         files: .
+         files: file.txt
          repository: https://github.com/AntoniHub/C0D3X.git
          token: ${{ secrets.PAT }}
          force: true
          directory: "Jenkins-CI"
-         
+
     - name: Create Issue
       uses: imjohnbo/issue-bot@v3
       with:
@@ -86,19 +68,19 @@ jobs:
           📌 Backend Testing with Pytest, SQL & NoSQL
           📌 Linux Testing with Vagrant & VirtualBox
           📌 Mobile Testing with Android SDK & iOS
-          📝 I write in depth on my website about myself rodriguezfarias.com
+          📝 I write in depth on my website about myself [rodriguezfarias.com](https://rodriguezfarias.com/)
         pinned: false
         token: ${{ secrets.PAT }}
 
 # For Pull Request
-    - name: Push .HTML to Repo
+    - name: Push File to Repo
       uses: actions-x/commit@v6
       with:
         email: abgrodriguezfarias@gmail.com
         name: Antonio Rodriguez Farias
-        message: download .HTML to see report
+        message: Lorem Ipsum
         branch: test
-        files: daily_test.html
+        files: file.txt
         repository: https://github.com/AntoniHub/C0D3X.git
         token: ${{ secrets.PAT }}
         force: true
@@ -110,6 +92,22 @@ jobs:
         destination_branch: "master"
         source_branch: "test"
         github_token: ${{ secrets.PAT }}
-        pr_title: "Test"
-        pr_body: "Test"
+        pr_title: "QA Engineer | Antonio Rodriguez Farias"
+        pr_body: |-
+          :wave: Hi, I am {{#each assignees}}@{{this}}{{#unless @last}}, {{/unless}}{{/each}}!
+
+          🚀 About me
+          Software QA Engineer with experience in Frontend, Backend, Continuous Integration, Databases (SQL and NoSQL), UX/UI, Mobile, Architecture, Linux / macOS / Windows testing.
+          
+          📊 Master Degree in Big Data - Catholic University of Avila
+          🔒 Post Graduate Diploma in Defensive Cybersecurity
+          💡 Diploma in Machine Learning | AI applied to Business
+          📌 Continuous Testing with GitHub Actions
+          📌 API Testing with Postman & Python
+          📌 Frontend Testing with Selenium WebDriver
+          📌 Backend Testing with Pytest, SQL & NoSQL
+          📌 Linux Testing with Vagrant & VirtualBox
+          📌 Mobile Testing with Android SDK & iOS
+          📝 I write in depth on my website about myself [rodriguezfarias.com](https://rodriguezfarias.com/)
         pr_label: "autoumated-pr"
+  
