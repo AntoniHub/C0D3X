@@ -80,7 +80,16 @@ jobs:
             📌 Linux Testing with Vagrant & VirtualBox
             📌 Mobile Testing with Android SDK & iOS
             📝 I write in depth on my website about myself [rodriguezfarias.com](https://rodriguezfarias.com/)
-          pr_label: "automated-pr"
+          pr_label: "automerge"
 
       #- name: GH Create PR
         #run: gh pr create --base master --head test --title "QA Engineer | Antonio Rodriguez" --body "QA Engineer | Antonio Rodriguez Farias."
+
+      - name: automerge
+        uses: "pascalgn/automerge-action@v0.15.6"
+        env:
+          GITHUB_TOKEN: "${{ secrets.PAT }}"
+      - name: feedback
+        if: ${{ steps.automerge.outputs.mergeResult == 'merged' }}
+        run: |
+          echo "Pull request ${{ steps.automerge.outputs.pullRequestNumber }} merged!"
