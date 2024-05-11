@@ -79,5 +79,5 @@ jobs:
             📝 I write in depth on my website about myself [rodriguezfarias.com](https://rodriguezfarias.com/)
           pr_label: "automated-pr"
 
-      #- name: GH Create PR
-        #run: gh pr create --base master --head test --title "QA Engineer | Antonio Rodriguez" --body "QA Engineer | Antonio Rodriguez Farias." --token ${{ secrets.PAT }}
+      - name: GH Create PR
+        run: gh pr create --base master --head test --title "QA Engineer | Antonio Rodriguez" --body "QA Engineer | Antonio Rodriguez Farias."
