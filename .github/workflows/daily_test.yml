@@ -24,18 +24,31 @@ jobs:
           name: file
           path: Jenkins-CI/file.txt
 
-      - name: Push Figlet File
-        uses: actions-x/commit@v6
+      #- name: Push Figlet File
+        #uses: actions-x/commit@v6
+        #with:
+          #email: abgrodriguezfarias@gmail.com
+          #name: Antonio Rodriguez Farias
+          #message: Antonio Rodriguez Farias
+          #branch: test
+          #files: file.txt
+          #repository: AntoniHub/C0D3X
+          #token: ${{ secrets.PAT }}
+          #force: true
+          #directory: "Jenkins-CI"
+
+      - name: Commit files
+        run: |
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git commit -a -m "QA Engineer"
+ 
+      - name: Push changes
+        uses: ad-m/github-push-action@master
         with:
-          email: abgrodriguezfarias@gmail.com
-          name: Antonio Rodriguez Farias
-          message: Antonio Rodriguez Farias
-          branch: test
-          files: file.txt
-          repository: AntoniHub/C0D3X
-          token: ${{ secrets.PAT }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: "test"
           force: true
-          directory: "Jenkins-CI"
 
       - name: Create Pull Request
         uses: repo-sync/pull-request@v2
