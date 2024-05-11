@@ -9,6 +9,9 @@ on:
 jobs:
   test_figlet:
     runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.PAT }}
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
