@@ -19,6 +19,7 @@ jobs:
         run: |
           sudo apt install -y figlet
           figlet -c Antonio Rodriguez > file.txt
+          date >> file.txt
 
       - name: Upload Figlet File
         uses: actions/upload-artifact@v2
