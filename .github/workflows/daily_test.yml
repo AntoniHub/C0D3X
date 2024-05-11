@@ -76,7 +76,7 @@ jobs:
             📌 Backend Testing with Pytest, SQL & NoSQL
             📌 Linux Testing with Vagrant & VirtualBox
             📌 Mobile Testing with Android SDK & iOS
-            📝 I write in depth on my website about myself rodriguezfarias.com
+            📝 I write in depth on my website about myself [rodriguezfarias.com](https://rodriguezfarias.com/)
           pr_label: "automated-pr"
 
       #- name: GH Create PR
