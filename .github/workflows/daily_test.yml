@@ -5,6 +5,7 @@ name: QA Engineer | Antonio Rodriguez Farias
 on:
   schedule:
     - cron: '*/10 * * * *'
+  # workflow_dispatch:
 
 jobs:
   test_figlet:
@@ -30,9 +31,9 @@ jobs:
       - name: Set up Docker apt repository
         run: |
           sudo apt-get -y update
-          sudo apt-get install -y ca-certificates curl
-          sudo install -y -m 0755 -d /etc/apt/keyrings
-          sudo curl -y -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+          sudo apt-get install ca-certificates curl
+          sudo install -m 0755 -d /etc/apt/keyrings
+          sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
           sudo chmod a+r /etc/apt/keyrings/docker.asc
 
           echo \
