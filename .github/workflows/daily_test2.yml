@@ -1,0 +1,150 @@
+# This workflow will install Python dependencies, run tests and lint with a single version of Python
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
+name: QA Engineer | Antonio Rodriguez Farias
+
+on:
+  schedule:
+    - cron: '*/10 * * * *'
+  # workflow_dispatch:
+
+jobs:
+  test_figlet:
+    if: github.event.schedule == '*/10 * * * *'
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.10"]
+    defaults:
+      run:
+        working-directory: Jenkins-CI
+    env:
+      GH_TOKEN: ${{ secrets.PAT }}
+      API_KEY: ${{ secrets.API_KEY }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: test
+
+
+      - name: Set up Docker apt repository
+        run: |
+          sudo apt-get -y update
+          sudo apt-get install ca-certificates curl
+          sudo install -m 0755 -d /etc/apt/keyrings
+          sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+          sudo chmod a+r /etc/apt/keyrings/docker.asc
+
+          echo \
+          "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+          $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+          sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+          sudo apt-get -y update
+
+      - name: Install the Docker packages
+        run: |
+          sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+      - name: Verify that the Docker Engine installation is successful
+        run: |
+          sudo docker run hello-world
+
+
+      - name: Install OpenJDK 17
+        run: |
+          sudo apt -y update
+          sudo apt install -y fontconfig openjdk-17-jre
+
+
+      - name: Install Jenkins
+        run: |
+          sudo wget -O /usr/share/keyrings/jenkins-keyring.asc \
+          https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
+          echo "deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc]" \
+          https://pkg.jenkins.io/debian-stable binary/ | sudo tee \
+          /etc/apt/sources.list.d/jenkins.list > /dev/null
+          sudo apt-get -y update
+          sudo apt-get install -y jenkins
+
+      - name: Start Jenkins
+        run: |
+          sudo systemctl start jenkins
+          sudo systemctl status jenkins
+
+
+      - name: Install & Run Figlet
+        run: |
+          sudo apt install -y figlet
+          figlet -c Antonio Rodriguez > file.txt
+          date >> file.txt
+
+      - name: Upload Figlet File
+        uses: actions/upload-artifact@v4
+        with:
+          name: file
+          path: Jenkins-CI/file.txt
+
+      #- name: Push Figlet File
+        #uses: actions-x/commit@v6
+        #with:
+          #email: abgrodriguezfarias@gmail.com
+          #name: Antonio Rodriguez Farias
+          #message: Antonio Rodriguez Farias
+          #branch: test
+          #files: file.txt
+          #repository: AntoniHub/C0D3X
+          #token: ${{ secrets.PAT }}
+          #force: true
+          #directory: "Jenkins-CI"
+
+      - name: Commit files
+        run: |
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add .
+          git commit -m "QA Engineer"
+ 
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.PAT }}
+          branch: "test"
+          force: true
+
+      - name: Create Pull Request
+        uses: repo-sync/pull-request@v2
+        with:
+          destination_branch: "master"
+          source_branch: "test"
+          github_token: ${{ secrets.PAT }}
+          pr_title: "QA Engineer | Antonio Rodriguez Farias"
+          pr_body: |
+            :wave: Hi, I am @AntoniHub
+
+            🚀 About me
+            Software QA Engineer with experience in Frontend, Backend, Continuous Integration, Databases (SQL and NoSQL), UX/UI, Mobile, Architecture, Linux / macOS / Windows testing.
+
+            📊 Master Degree in Big Data - Catholic University of Avila
+            🔒 Post Graduate Diploma in Defensive Cybersecurity
+            💡 Diploma in Machine Learning | AI applied to Business
+            📌 Continuous Testing with GitHub Actions
+            📌 API Testing with Postman & Python
+            📌 Frontend Testing with Selenium WebDriver
+            📌 Backend Testing with Pytest, SQL & NoSQL
+            📌 Linux Testing with Vagrant & VirtualBox
+            📌 Mobile Testing with Android SDK & iOS
+            📝 I write in depth on my website about myself [rodriguezfarias.com](https://rodriguezfarias.com/)
+          pr_label: "automerge"
+
+      #- name: GH Create PR
+        #run: gh pr create --base master --head test --title "QA Engineer | Antonio Rodriguez" --body "QA Engineer | Antonio Rodriguez Farias."
+
+      - name: automerge
+        uses: "pascalgn/automerge-action@v0.16.3"
+        env:
+          GITHUB_TOKEN: "${{ secrets.PAT }}"
+      - name: feedback
+        if: ${{ steps.automerge.outputs.mergeResult == 'merged' }}
+        run: |
+          echo "Pull request ${{ steps.automerge.outputs.pullRequestNumber }} merged!"
