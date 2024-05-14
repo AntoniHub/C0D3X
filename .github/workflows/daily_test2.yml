@@ -4,12 +4,12 @@ name: QA Engineer | Antonio Rodriguez Farias
 
 on:
   schedule:
-    - cron: '*/15 * * * *'
+    - cron: '*/10 * * * *'
   # workflow_dispatch:
 
 jobs:
   test_figlet:
-    if: github.event.schedule == '*/15 * * * *'
+    if: github.event.schedule == '*/10 * * * *'
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -25,7 +25,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          ref: test
+          ref: test2
 
 
       - name: Set up Docker apt repository
@@ -109,14 +109,14 @@ jobs:
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.PAT }}
-          branch: "test"
+          branch: "test2"
           force: true
 
       - name: Create Pull Request
         uses: repo-sync/pull-request@v2
         with:
           destination_branch: "master"
-          source_branch: "test"
+          source_branch: "test2"
           github_token: ${{ secrets.PAT }}
           pr_title: "QA Engineer | Antonio Rodriguez Farias"
           pr_body: |
