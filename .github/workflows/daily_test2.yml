@@ -25,7 +25,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          ref: test2
+          ref: daily2
 
 
       - name: Set up Docker apt repository
@@ -109,14 +109,14 @@ jobs:
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.PAT }}
-          branch: "test2"
+          branch: "daily2"
           force: true
 
       - name: Create Pull Request
         uses: repo-sync/pull-request@v2
         with:
-          destination_branch: "master"
-          source_branch: "test2"
+          destination_branch: "daily3"
+          source_branch: "daily2"
           github_token: ${{ secrets.PAT }}
           pr_title: "QA Engineer | Antonio Rodriguez Farias"
           pr_body: |
