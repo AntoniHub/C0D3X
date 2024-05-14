@@ -1,5 +1,12 @@
-# This workflow will install Python dependencies, run tests and lint with a single version of Python
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
+# This workflow is an example of DevOps practices applied in daily testing.
+# The main feature of this WorkFlow is Figlet, an ascii art on these executions.
+
+# ===============================================
+# Yo can see some of my skills on my sites:      |
+# https://www.linkedin.com/in/arodriguezfarias/  |
+# https://rodriguezfarias.com/                   |
+# ==============================================
+
 name: QA Engineer | Antonio Rodriguez Farias
 
 on:
