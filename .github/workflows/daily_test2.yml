@@ -3,13 +3,13 @@
 name: QA Engineer | Antonio Rodriguez Farias
 
 on:
-  schedule:
-    - cron: '*/15 * * * *'
-  # workflow_dispatch:
+  #schedule:
+    #- cron: '*/15 * * * *'
+  workflow_dispatch:
 
 jobs:
   test_figlet:
-    if: github.event.schedule == '*/15 * * * *'
+    #if: github.event.schedule == '*/15 * * * *'
     runs-on: ubuntu-latest
     strategy:
       matrix:
