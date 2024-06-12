@@ -52,7 +52,7 @@ jobs:
           token: ${{ secrets.PAT }}
           commit-message: "QA Engineer | Antonio Rodriguez Farias"
           committer: |
-            AntoniHub <abgrodriguezfarias@gmail.com>
+            AntoniHub <abgrodriguezfarias@gmail.com>,
             paRRbot-code <antonio+4@rodriguezfarias.com>
           author: AntoniHub <abgrodriguezfarias@gmail.com>
           branch: master
