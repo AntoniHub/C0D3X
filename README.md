@@ -8,7 +8,7 @@
 <h1 align="center"> Python Tests </h1>
 
 
-### Backend tests:
+### Backend tests: 
 * An automated endpoint test circuit is created by making the different calls implemented on them, using the <a href="https://docs.python-requests.org/en/latest/index.html"><i>requests</i></a> library.
 * Sometimes it connects with <a href="https://firebase.google.com/docs/firestore/quickstart?hl=es-419#python"><i>Cloud Firestore</i></a> to be able to take data as unique identifiers to be able to set them in the next call as an environment variable since the response is empty.
 * Being able to delete data created from cloud firestore or using the corresponding endpoint (delete) if applicable.
