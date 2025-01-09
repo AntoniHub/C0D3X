@@ -9,7 +9,6 @@ on:
 
 jobs:
   test_figlet:
-    #if: github.event.schedule == '*/15 * * * *'
     runs-on: ubuntu-22.04
     strategy:
       matrix:
@@ -26,7 +25,6 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: test
-
 
       - name: Set up Docker apt repository
         run: |
@@ -50,12 +48,10 @@ jobs:
         run: |
           sudo docker run hello-world
 
-
-      - name: Install OpenJDK 17
+      - name: Install OpenJDK 11
         run: |
           sudo apt -y update
-          sudo apt install -y fontconfig openjdk-17-jre
-
+          sudo apt install -y fontconfig openjdk-11-jre
 
       - name: Install Jenkins
         run: |
@@ -71,7 +67,7 @@ jobs:
         run: |
           sudo systemctl start jenkins
           sudo systemctl status jenkins
-
+          sudo journalctl -xeu jenkins.service  # Agregado para obtener más información
 
       - name: Install & Run Figlet
         run: |
@@ -85,26 +81,13 @@ jobs:
           name: file
           path: Jenkins-CI/file.txt
 
-      #- name: Push Figlet File
-        #uses: actions-x/commit@v6
-        #with:
-          #email: abgrodriguezfarias@gmail.com
-          #name: Antonio Rodriguez Farias
-          #message: Antonio Rodriguez Farias
-          #branch: test
-          #files: file.txt
-          #repository: AntoniHub/C0D3X
-          #token: ${{ secrets.PAT }}
-          #force: true
-          #directory: "Jenkins-CI"
-
       - name: Commit files
         run: |
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git add .
           git commit -m "QA Engineer | Antonio Rodriguez Farias"
- 
+
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
@@ -113,17 +96,13 @@ jobs:
           force: true
 
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v6
+        uses: repo-sync/pull-request@v2
         with:
-          token: ${{ secrets.PAT }}
-          commit-message: "QA Engineer | Antonio Rodriguez Farias"
-          committer: |
-            AntoniHub <abgrodriguezfarias@gmail.com>,
-            paRRbotCode <41898282+github-actions[bot]@users.noreply.github.com>
-          author: AntoniHub <abgrodriguezfarias@gmail.com>
-          branch: master
-          base: test
-          title: |
+          destination_branch: "master"
+          source_branch: "test"
+          github_token: ${{ secrets.PAT }}
+          pr_title: "QA Engineer | Antonio Rodriguez Farias"
+          pr_body: |
             :wave: Hi, I am @AntoniHub
 
             🚀 About me
@@ -139,15 +118,13 @@ jobs:
             📌 Linux Testing with Vagrant & VirtualBox
             📌 Mobile Testing with Android SDK & iOS
             📝 I write in depth on my website about myself [rodriguezfarias.com](https://rodriguezfarias.com/)
-          labels: automerge
+          pr_label: "automerge"
 
-      #- name: GH Create PR
-        #run: gh pr create --base master --head test --title "QA Engineer | Antonio Rodriguez" --body "QA Engineer | Antonio Rodriguez Farias."
-
-      - name: Enable Pull Request Automerge
-        if: steps.cpr.outputs.pull-request-operation == 'created'
-        uses: peter-evans/enable-pull-request-automerge@v3
-        with:
-          token: ${{ secrets.PAT }}
-          pull-request-number: ${{ steps.cpr.outputs.pull-request-number }}
-          merge-method: squash
+      - name: automerge
+        uses: "pascalgn/automerge-action@v0.16.3"
+        env:
+          GITHUB_TOKEN: "${{ secrets.PAT }}"
+      - name: feedback
+        if: ${{ steps.automerge.outputs.mergeResult == 'merged' }}
+        run: |
+          echo "Pull request ${{ steps.automerge.outputs.pullRequestNumber }} merged!"
