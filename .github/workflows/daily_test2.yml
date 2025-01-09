@@ -10,7 +10,7 @@ on:
 jobs:
   test_figlet:
     #if: github.event.schedule == '*/15 * * * *'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     strategy:
       matrix:
         python-version: ["3.10"]
@@ -113,13 +113,17 @@ jobs:
           force: true
 
       - name: Create Pull Request
-        uses: repo-sync/pull-request@v2
+        uses: peter-evans/create-pull-request@v6
         with:
-          destination_branch: "master"
-          source_branch: "test"
-          github_token: ${{ secrets.PAT }}
-          pr_title: "QA Engineer | Antonio Rodriguez Farias"
-          pr_body: |
+          token: ${{ secrets.PAT }}
+          commit-message: "QA Engineer | Antonio Rodriguez Farias"
+          committer: |
+            AntoniHub <abgrodriguezfarias@gmail.com>,
+            paRRbotCode <41898282+github-actions[bot]@users.noreply.github.com>
+          author: AntoniHub <abgrodriguezfarias@gmail.com>
+          branch: master
+          base: test
+          title: |
             :wave: Hi, I am @AntoniHub
 
             🚀 About me
@@ -135,16 +139,15 @@ jobs:
             📌 Linux Testing with Vagrant & VirtualBox
             📌 Mobile Testing with Android SDK & iOS
             📝 I write in depth on my website about myself [rodriguezfarias.com](https://rodriguezfarias.com/)
-          pr_label: "automerge"
+          labels: automerge
 
       #- name: GH Create PR
         #run: gh pr create --base master --head test --title "QA Engineer | Antonio Rodriguez" --body "QA Engineer | Antonio Rodriguez Farias."
 
-      - name: automerge
-        uses: "pascalgn/automerge-action@v0.16.3"
-        env:
-          GITHUB_TOKEN: "${{ secrets.PAT }}"
-      - name: feedback
-        if: ${{ steps.automerge.outputs.mergeResult == 'merged' }}
-        run: |
-          echo "Pull request ${{ steps.automerge.outputs.pullRequestNumber }} merged!"
+      - name: Enable Pull Request Automerge
+        if: steps.cpr.outputs.pull-request-operation == 'created'
+        uses: peter-evans/enable-pull-request-automerge@v3
+        with:
+          token: ${{ secrets.PAT }}
+          pull-request-number: ${{ steps.cpr.outputs.pull-request-number }}
+          merge-method: squash
