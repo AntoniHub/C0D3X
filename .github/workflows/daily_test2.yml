@@ -107,6 +107,7 @@ jobs:
           force: true
 
       - name: Create Pull Request
+        id: cpr
         uses: repo-sync/pull-request@v2
         with:
           destination_branch: "master"
@@ -131,13 +132,10 @@ jobs:
             📝 I write in depth on my website about myself [rodriguezfarias.com](https://rodriguezfarias.com/)
           pr_label: "automerge"
 
-      - name: automerge
-        uses: reitermarkus/automerge@v2
+      - name: Enable Pull Request Automerge
+        if: steps.cpr.outputs.pull-request-operation == 'created'
+        uses: peter-evans/enable-pull-request-automerge@v3
         with:
           token: ${{ secrets.PAT }}
-          merge-method: rebase
-          do-not-merge-labels: never-merge
-          required-labels: automerge
-          pull-request: ${{ github.event.inputs.pull-request }}
-          review: ${{ github.event.inputs.review }}
-          dry-run: true
+          pull-request-number: ${{ steps.cpr.outputs.pull-request-number }}
+          merge-method: squash
