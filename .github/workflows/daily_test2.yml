@@ -132,10 +132,12 @@ jobs:
           pr_label: "automerge"
 
       - name: automerge
-        uses: "pascalgn/automerge-action@v0.16.3"
-        env:
-          GITHUB_TOKEN: "${{ secrets.PAT }}"
-      - name: feedback
-        if: ${{ steps.automerge.outputs.mergeResult == 'merged' }}
-        run: |
-          echo "Pull request ${{ steps.automerge.outputs.pullRequestNumber }} merged!"
+        uses: reitermarkus/automerge@v2
+        with:
+          token: ${{ secrets.PAT }}
+          merge-method: rebase
+          do-not-merge-labels: never-merge
+          required-labels: automerge
+          pull-request: ${{ github.event.inputs.pull-request }}
+          review: ${{ github.event.inputs.review }}
+          dry-run: true
