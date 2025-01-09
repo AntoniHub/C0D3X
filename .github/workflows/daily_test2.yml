@@ -63,17 +63,17 @@ jobs:
           sudo apt-get -y update
           sudo apt-get install -y jenkins
 
-      - name: Start Jenkins
-        run: |
-          sudo systemctl start jenkins
-          sudo systemctl status jenkins || sudo journalctl -xeu jenkins.service  # Agregado para obtener más información en caso de error
+      # - name: Start Jenkins
+        # run: |
+          # sudo systemctl start jenkins
+          # sudo systemctl status jenkins || sudo journalctl -xeu jenkins.service  # Agregado para obtener más información en caso de error
 
-      - name: Change Jenkins port to 8081 if necessary
-        run: |
-          sudo systemctl edit jenkins
-          echo -e "[Service]\nEnvironment=\"JENKINS_PORT=8081\"" | sudo tee /etc/systemd/system/jenkins.service.d/override.conf
-          sudo systemctl daemon-reload
-          sudo systemctl restart jenkins
+      # - name: Change Jenkins port to 8081 if necessary
+        # run: |
+          # sudo systemctl edit jenkins
+          # echo -e "[Service]\nEnvironment=\"JENKINS_PORT=8081\"" | sudo tee /etc/systemd/system/jenkins.service.d/override.conf
+          # sudo systemctl daemon-reload
+          # sudo systemctl restart jenkins
 
       - name: System Update
         run: |
