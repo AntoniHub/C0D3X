@@ -4,7 +4,7 @@ name: QA Engineer | Antonio Rodriguez Farias
 
 on:
   schedule:
-    - cron: '0 */6 * * *'
+    - cron: '0 */4 * * *'
   workflow_dispatch:
 
 jobs:
@@ -24,7 +24,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          ref: test
+          ref: master
 
       - name: Set up Docker apt repository
         run: |
@@ -103,5 +103,5 @@ jobs:
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.PAT }}
-          branch: "test"
+          branch: "master"
           force: true
