@@ -1,5 +1,5 @@
 <!-- <img alt="Static Badge" src="https://img.shields.io/badge/Antonio_Rodriguez-%23bc1224"> --> 
-<!-- <img alt="Static Badge" src="https://img.shields.io/badge/QA_Engineer_%7C_Antonio_Rodriguez_Farias-%23007bff"> -->
+<!-- <img alt="Static Badge" src="https://img.shields.io/badge/QA_Engineer_%7C_Antonio_Rodriguez_Farias-%23007bff"> --> 
 <!-- <img alt="Static Badge" src="https://img.shields.io/badge/QA_Engineer_%7C_Antonio_Rodriguez_Farias-%23007bff"> -->
 <!-- <img alt="Static Badge" src="https://img.shields.io/badge/QA_Engineer_%7C_Antonio_Rodriguez_Farias-%2328a745"> -->
 <img alt="Static Badge" src="https://img.shields.io/badge/Antonio_Rodriguez_Farias-%2328a745?style=plastic&label=QA%20Engineer&labelColor=%23dc3545">
