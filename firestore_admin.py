@@ -22,4 +22,3 @@ for r in verify:
 verify = db.collection('clients').order_by('lastVisit', direction=firestore.Query.DESCENDING).limit_to_last(5).get()
 for r in verify:
     print(r.id)
-
