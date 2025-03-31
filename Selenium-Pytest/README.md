@@ -1,4 +1,4 @@
-<h1 align="center"> Requirements to execute Tests in Pytest </h1>
+<h1 align="center"> Requirements to execute Tests in Pytest </h1> 
 <h3> Tools: </h3>
 <li> .- Install  <a href="https://www.python.org/downloads/"> Python </a></li>
 <li>.- IDE: <a href="https://www.jetbrains.com/es-es/pycharm/download/"> PyCharm </a></li>
