@@ -6,7 +6,7 @@
 
 
 <h1 align="center"> Python Tests </h1>
-
+ 
 
 ### Backend tests:
 * An automated endpoint test circuit is created by making the different calls implemented on them, using the <a href="https://docs.python-requests.org/en/latest/index.html"><i>requests</i></a> library.
