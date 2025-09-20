@@ -6,7 +6,7 @@
 <i>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; This packages are: Selenium, Pytest, Openpyxl, Requests, Flask</i>
 <li>.- Download <a href="https://selenium-python.readthedocs.io/installation.html#drivers"> driver </a> for browser </li>
 &nbsp;
- 
+
 <h1 align="center"> Gerate reports in Pytest </h1>
 <h3> Requirements: </h3>
 <li> .- Install <a href="https://www.python.org/downloads/"> Python </a></li>
