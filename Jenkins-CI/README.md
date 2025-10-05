@@ -7,7 +7,7 @@
 <i>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Some plugins: ShiningPanda (virtualenv), Selenium, Python.</i>
 <li>.- See <a href="https://www.jenkins.io/doc/pipeline/tour/getting-started/"> Guided Tour </a> Jenkins tutorial. </li>
 &nbsp;&nbsp;
-
+ 
 
 With the freestyle project can create a Windows/Shell execution:
 <pre><blockquote>
