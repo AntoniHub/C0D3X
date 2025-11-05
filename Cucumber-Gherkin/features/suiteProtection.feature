@@ -4,7 +4,7 @@ Feature: User browsing in Proteccion
     .- View the protected devices and the status of the protections.
     .- Send licenses and see the licenses sent to your employees.
     .- You can also view the security status of mailboxes, view the quarantine, release and delete mails that seem suspicious.
-
+ 
   Scenario: User who wants to check the status of his safeguards
     Given User in the example.com application who wants to check the status of his protections
      When Click on Protections
