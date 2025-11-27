@@ -7,7 +7,7 @@
 
 ## Example for start Selenium in [Python](https://www.python.org/downloads/)
 [ChromeDriver - Chromium](https://chromedriver.chromium.org/getting-started)
-
+ 
 <pre><blockquote>
 import time
 
