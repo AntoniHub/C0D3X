@@ -6,7 +6,7 @@ from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
 
-
+ 
 options = Options()
 #options.add_argument('--headless')
 options.binary = FirefoxBinary(r'C:\Program Files\Mozilla Firefox\firefox.exe')
