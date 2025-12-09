@@ -4,7 +4,7 @@
 <li>.- Add route of chrome binary application to <b>PATH</b> : <i>C:\Program Files\Google\Chrome\Application</i></li>
 <li>.- Configure IDE: <a href="https://www.jetbrains.com/es-es/pycharm/"> PyCharm </a> </li>
 <li>.- Run test case from CMD as instructed in the main <a href="https://github.com/AntoniHub/Cyber#readme"> README </a></li>
-
+ 
 ## Example for start Selenium in [Python](https://www.python.org/downloads/)
 [ChromeDriver - Chromium](https://chromedriver.chromium.org/getting-started)
  
