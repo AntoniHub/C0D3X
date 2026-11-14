@@ -1,0 +1,26 @@
+{
+  "ORD-1001": {
+    "customer_email": "alice@example.com",
+    "customer_name": "Alice Moreno",
+    "status": "shipped",
+    "eta": "Tuesday",
+    "items": ["Trail Backpack 30L", "Merino Socks (2 pairs)"],
+    "ship_to": "14 Harbor Street, Valencia"
+  },
+  "ORD-1002": {
+    "customer_email": "bob@example.com",
+    "customer_name": "Bob Fernandez",
+    "status": "processing",
+    "eta": "Friday",
+    "items": ["Wireless Earbuds"],
+    "ship_to": "8 Oak Avenue, Madrid"
+  },
+  "ORD-1003": {
+    "customer_email": "carla@example.com",
+    "customer_name": "Carla Ruiz",
+    "status": "delivered",
+    "eta": "delivered last Monday",
+    "items": ["Standing Desk Mat"],
+    "ship_to": "22 Pine Road, Sevilla"
+  }
+}

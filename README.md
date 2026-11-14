@@ -24,3 +24,6 @@
 
 ### Continuous testing
 * <a href="https://www.jenkins.io/"><i>Jenkins</i></a> is used as a continuous integration tool. Create a freestyle project that includes the development branches, a cronjob with the desired runtimes, and a windows console run that sends to the project directory and runs the script.
+
+### LLM Testing
+Automated evaluation of an AI agent with DeepEval, Promptfoo and Garak, running on GitHub Actions every day. See the [LLM Testing](LLM%20Testing) folder.

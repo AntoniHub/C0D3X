@@ -1,0 +1,7 @@
+__pycache__/
+.pytest_cache/
+.deepeval/
+.venv/
+.venv-garak/
+reports/raw/
+node_modules/
