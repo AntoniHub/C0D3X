@@ -1,0 +1,104 @@
+# UI test frameworks: Selenium + pytest and Playwright + pytest, on a browser matrix.
+# They run against the bundled demo app (demo-app), so they are deterministic and need no secrets.
+# Triggers: changes to the frameworks or the demo app, every day at 14:00 UTC, and on demand.
+#
+# Built by QA Engineer | Antonio Rodriguez Farias
+
+name: UI Tests | Selenium and Playwright | QA Engineer | Antonio Rodriguez Farias
+
+on:
+  push:
+    paths:
+      - "Selenium-Pytest/framework/**"
+      - "Playwright-Pytest/framework/**"
+      - "demo-app/**"
+      - ".github/workflows/ui-tests.yml"
+  pull_request:
+    paths:
+      - "Selenium-Pytest/framework/**"
+      - "Playwright-Pytest/framework/**"
+      - "demo-app/**"
+      - ".github/workflows/ui-tests.yml"
+  schedule:
+    - cron: "0 14 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ui-tests-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name != 'schedule' && github.event_name != 'workflow_dispatch' }}
+
+jobs:
+  selenium:
+    name: Selenium (${{ matrix.browser }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        browser: [chrome, firefox]
+    defaults:
+      run:
+        working-directory: Selenium-Pytest/framework
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: Selenium-Pytest/framework/requirements.txt
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run the suite
+        # Chrome, Firefox and their drivers are preinstalled on ubuntu-latest; Selenium Manager picks them up.
+        run: pytest --selenium-browser ${{ matrix.browser }}
+
+      - name: Upload report and failure evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: selenium-${{ matrix.browser }}
+          path: Selenium-Pytest/framework/reports
+          retention-days: 7
+
+  playwright:
+    name: Playwright (${{ matrix.browser }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        browser: [chromium, firefox]
+    defaults:
+      run:
+        working-directory: Playwright-Pytest/framework
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: Playwright-Pytest/framework/requirements.txt
+
+      - name: Install dependencies and the browser
+        run: |
+          pip install -r requirements.txt
+          playwright install --with-deps ${{ matrix.browser }}
+
+      - name: Run the suite
+        run: pytest --browser ${{ matrix.browser }}
+
+      - name: Upload traces, videos and screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-${{ matrix.browser }}
+          path: Playwright-Pytest/framework/reports
+          if-no-files-found: ignore  # nothing is written when every test passes
+          retention-days: 7

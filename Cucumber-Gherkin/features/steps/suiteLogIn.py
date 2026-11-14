@@ -1,3 +1,9 @@
+import os
+try:
+    from dotenv import load_dotenv
+    load_dotenv()  # optional: QA_* variables from an untracked .env file
+except ImportError:
+    pass
 import time
 from behave import *
 from selenium import webdriver
@@ -66,7 +72,7 @@ def test_06_LogIn(context):
     password = context.driver.find_element(By.ID,'password')
     password.click()
     time.sleep(0.2)
-    password.send_keys('T3st.4321')
+    password.send_keys(os.environ["QA_UI_PASSWORD"])
     time.sleep(0.2)
 
 @then('Successfully log in to Cyber Guardian at /client')
