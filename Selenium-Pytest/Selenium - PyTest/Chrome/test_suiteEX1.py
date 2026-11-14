@@ -1,3 +1,9 @@
+import os
+try:
+    from dotenv import load_dotenv
+    load_dotenv()  # optional: QA_* variables from an untracked .env file
+except ImportError:
+    pass
 import time
 import pytest
 from selenium import webdriver
@@ -60,7 +66,7 @@ class TestLogIn:
         mail = driver.find_element(By.ID,'businessEmail')
         mail.click()
         time.sleep(0.2)
-        mail.send_keys('abgrodriguezfarias@gmail.com')
+        mail.send_keys(os.environ["QA_EMAIL"])
         time.sleep(0.2)
 
     # Send password
@@ -69,7 +75,7 @@ class TestLogIn:
         password = driver.find_element(By.ID,'password')
         password.click()
         time.sleep(0.2)
-        password.send_keys('T3st.4321')
+        password.send_keys(os.environ["QA_UI_PASSWORD"])
         time.sleep(0.2)
 
     # Start session
@@ -280,7 +286,7 @@ class TestEmployees:
         email.clear()
         time.sleep(0.3)
 
-        email.send_keys('abgrodriguezfarias@gmail.com')
+        email.send_keys(os.environ["QA_EMAIL"])
         time.sleep(0.3)
 
     # Add Rol

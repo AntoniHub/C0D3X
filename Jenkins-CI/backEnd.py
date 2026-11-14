@@ -1,3 +1,9 @@
+import os
+try:
+    from dotenv import load_dotenv
+    load_dotenv()  # optional: QA_* variables from an untracked .env file
+except ImportError:
+    pass
 import sys
 import pprint
 import unittest
@@ -7,17 +13,19 @@ from faker import Faker
 from firebase_admin import firestore
 from firebase_admin import credentials
 
-cred = credentials.Certificate(r"C:\AntonioRodriguezFarias\serviceAccountKey.json")
+cred = credentials.Certificate(os.environ.get("GOOGLE_APPLICATION_CREDENTIALS", "serviceAccountKey.json"))
 firebase_admin.initialize_app(cred)
 db = firestore.client()
 
 fake = Faker('es_ES')
 s = requests.session()
 
-with open("API_KEY.txt", "r", encoding="utf-8") as key:
-    for api in key:
-        api = api.strip()
-        API_KEY = api
+# API key: environment variable first (CI secret), local API_KEY.txt as fallback
+API_KEY = os.environ.get("API_KEY", "")
+if not API_KEY and os.path.exists("API_KEY.txt"):
+    with open("API_KEY.txt", "r", encoding="utf-8") as key:
+        for api in key:
+            API_KEY = api.strip()
 
 #
 #
@@ -92,14 +100,14 @@ class TestPhishingAPI(unittest.TestCase):
                 "custom_name": "Coronavirus (Covid 19)",
                 "campaign_type": "coronavirus_campaign-es",
                 "destinations": [{
-                    "email": "abgrodriguezfarias@gmail.com",
+                    "email": os.environ["QA_EMAIL"],
                     "first_name": "Antonio",
                     "last_name": "Rodriguez",
                     "position": ""
                 }],
                 "customization": {
                     "company": "TEST Prueba",
-                    "email": "abgordriguezfarias@gmail.com"
+                    "email": os.environ["QA_EMAIL"]
                 }
             }
         )
@@ -128,14 +136,14 @@ class TestPhishingAPI(unittest.TestCase):
                 "custom_name": "Coronavirus (Covid 19)",
                 "campaign_type": "coronavirus_campaign-es",
                 "destinations": [{
-                    "email": "abgrodriguezfarias@gmail.com",
+                    "email": os.environ["QA_EMAIL"],
                     "first_name": "Antonio",
                     "last_name": "Rodriguez",
                     "position": ""
                 }],
                 "customization": {
                     "company": "TEST Prueba",
-                    "email": "abgrodriguezfarias@gmail.com"
+                    "email": os.environ["QA_EMAIL"]
                 }
             }
         )
@@ -502,8 +510,8 @@ class TestClients(unittest.TestCase):
             'https://api-testing.ardoriguezf.es/{arodriguezf}',
             headers={'Accept': 'application/json', 'Content-Type': 'application/json'},
             json={
-                "email": "abgrodriguezfarias@gmail.com",
-                "password": "T3st.1234"
+                "email": os.environ["QA_EMAIL"],
+                "password": os.environ["QA_API_PASSWORD"]
             }
         )
 
@@ -558,8 +566,8 @@ class TestClients(unittest.TestCase):
             'https://api-testing.ardoriguezf.es/{arodriguezf}',
             headers={'Accept': 'application/json', 'Content-Type': 'application/json'},
             json={
-                "email": "abgrodriguezfarias@gmail.com",
-                "password": "T3st.1234"
+                "email": os.environ["QA_EMAIL"],
+                "password": os.environ["QA_API_PASSWORD"]
             }
         )
 
@@ -720,8 +728,8 @@ class TestSubscriptions(unittest.TestCase):
             'https://api-testing.ardoriguezf.es/{arodriguezf}',
             headers={'Accept': 'application/json', 'Content-Type': 'application/json'},
             json={
-                "email": "abgrodriguezfarias@gmail.com",  # -> 1HhPRdAzXYgzQWEui6H6
-                "password": "T3st.1234"
+                "email": os.environ["QA_EMAIL"],  # -> 1HhPRdAzXYgzQWEui6H6
+                "password": os.environ["QA_API_PASSWORD"]
             }
         )
 
@@ -895,7 +903,7 @@ class TestBreaches(unittest.TestCase):
         print('\n\n**********  Breaches  **********')
         print('Breaches - Dismiss')
         params = {
-            'email': 'abgrodriguezfarias@gmail.com',
+            'email': os.environ["QA_EMAIL"],
             'client': 'pDDVQgmvbouD8rqHsVjy',
             'breach': 'stub breach',
             'date': '2036-01-02T15:04:05Z'
@@ -1039,8 +1047,8 @@ class TestQualificationForms(unittest.TestCase):
             'https://api-testing.ardoriguezf.es/{arodriguezf}',
             headers={'Accept': 'application/json', 'Content-Type': 'application/json'},
             json={
-                "email": "abgrodriguezfarias@gmail.com",  # -> BmHXDMC6LoK5cJd0F9Kj
-                "password": "T3st.1234"
+                "email": os.environ["QA_EMAIL"],  # -> BmHXDMC6LoK5cJd0F9Kj
+                "password": os.environ["QA_API_PASSWORD"]
             }
         )
 

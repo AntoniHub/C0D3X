@@ -1,0 +1,107 @@
+# Performance smoke tests for the LLM agent endpoint with k6 and Locust.
+# Runs on every push and pull request that touches Performance or the agent code,
+# every day at 13:00 UTC (one hour after the LLM evaluation run) and on demand.
+# Intentionally tiny (1 virtual user, a handful of requests): it checks that latency
+# budgets and response correctness hold, it does not stress the service.
+#
+# Built by QA Engineer | Antonio Rodriguez Farias
+
+name: Performance | k6 and Locust | QA Engineer | Antonio Rodriguez Farias
+
+on:
+  push:
+    paths:
+      - "Performance/**"
+      - "LLM Testing/agent/**"
+      - ".github/workflows/performance.yml"
+  pull_request:
+    paths:
+      - "Performance/**"
+      - "LLM Testing/agent/**"
+      - ".github/workflows/performance.yml"
+  schedule:
+    - cron: "0 13 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: performance-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name != 'schedule' && github.event_name != 'workflow_dispatch' }}
+
+env:
+  AGENT_MODE: mock
+  BASE_URL: http://127.0.0.1:8000
+  LATENCY_BUDGET_MS: "2000"
+
+jobs:
+  performance:
+    name: k6 and Locust against the hardened agent
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install the agent runtime and Locust
+        # Only what the agent needs, pinned like "LLM Testing/requirements.txt" (no DeepEval here).
+        run: >
+          pip install fastapi==0.162.7 uvicorn==0.54.0 httpx==0.28.1
+          langchain-core==1.8.0 langgraph==1.2.22
+          -r Performance/requirements.txt
+
+      - uses: grafana/setup-k6-action@v1
+
+      - name: Start the agent
+        working-directory: LLM Testing
+        run: scripts/start_agents.sh python
+
+      - name: k6 latency and correctness gate
+        working-directory: Performance
+        run: |
+          mkdir -p reports
+          k6 run k6/chat-latency.js
+
+      - name: Locust load gate
+        if: always()
+        working-directory: Performance
+        run: >
+          python -m locust -f locust/locustfile.py --headless
+          -u 1 -r 1 -t 6s --host "$BASE_URL"
+          --html reports/locust.html --csv reports/locust
+
+      - name: Publish a summary
+        if: always()
+        working-directory: Performance
+        run: |
+          python - <<'PY' >> "$GITHUB_STEP_SUMMARY"
+          import csv, json, os
+          print("## Performance smoke test\n")
+          print("| Tool | Requests | Failures | p95 (ms) | Budget (ms) |")
+          print("|---|---|---|---|---|")
+          budget = os.environ["LATENCY_BUDGET_MS"]
+          try:
+              m = json.load(open("reports/k6-summary.json"))["metrics"]
+              print(f"| k6 | {m['http_reqs']['values']['count']} | "
+                    f"{m['http_req_failed']['values']['rate']:.2%} | "
+                    f"{m['http_req_duration']['values']['p(95)']:.1f} | {budget} |")
+          except Exception as error:
+              print(f"| k6 | no data ({error}) | | | {budget} |")
+          try:
+              row = next(r for r in csv.DictReader(open("reports/locust_stats.csv")) if r["Name"] == "Aggregated")
+              print(f"| Locust | {row['Request Count']} | {row['Failure Count']} | {row['95%']} | {budget} |")
+          except Exception as error:
+              print(f"| Locust | no data ({error}) | | | {budget} |")
+          PY
+
+      - name: Upload reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: performance-reports
+          path: Performance/reports
+          retention-days: 7

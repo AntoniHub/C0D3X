@@ -1,3 +1,9 @@
+import os
+try:
+    from dotenv import load_dotenv
+    load_dotenv()  # optional: QA_* variables from an untracked .env file
+except ImportError:
+    pass
 import time
 from behave import *
 from selenium import webdriver
@@ -38,7 +44,7 @@ def test_01_openHome(context):
     context.mail = context.driver.find_element(By.XPATH,'/html/body/div[1]/div/div[2]/div/div[2]/input')
     context.mail.click()
     time.sleep(0.2)
-    context.mail.send_keys('abgrodriguezfarias@gmail.com')
+    context.mail.send_keys(os.environ["QA_EMAIL"])
     time.sleep(0.2)
 
 # Send password
@@ -46,7 +52,7 @@ def test_01_openHome(context):
     context.password = context.driver.find_element(By.XPATH,'/html/body/div[1]/div/div[2]/div/div[3]/input')
     context.password.click()
     time.sleep(0.2)
-    context.password.send_keys('T3st.4321')
+    context.password.send_keys(os.environ["QA_UI_PASSWORD"])
     time.sleep(0.2)
 
 # Start session

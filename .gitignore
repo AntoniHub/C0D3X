@@ -1,0 +1,25 @@
+# secrets and local configuration
+.env
+*.env
+!.env.example
+serviceAccountKey.json
+API_KEY.txt
+access_token.txt
+
+# python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+
+# IDE and logs
+.idea/
+.vscode/
+geckodriver.log
+
+# test output
+test-results/
+playwright-report/
+reports/raw/
+*.log

@@ -1,0 +1,2 @@
+# Locust only. k6 is a standalone binary: https://grafana.com/docs/k6/latest/set-up/install-k6/
+locust==2.47.0
