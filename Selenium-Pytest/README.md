@@ -34,3 +34,4 @@
 #### NOTE:
 <h5>Automated GUI tests ensure the proper functioning of the web application and minimize the effort of performing long loop tests over and over again.</h5>
 <h5>These guarantee timely and repeated regression tests that do not validate the current content but take care of the proper functioning of what has already been developed.</h5>
+

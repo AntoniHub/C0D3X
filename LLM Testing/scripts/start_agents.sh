@@ -15,3 +15,4 @@ for port in 8000 8001; do
   curl -sf "http://127.0.0.1:${port}/health" > /dev/null || { echo "agent on :${port} did not start"; exit 1; }
 done
 echo "agents ready: hardened :8000, vulnerable :8001"
+

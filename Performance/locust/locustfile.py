@@ -78,3 +78,4 @@ def enforce_thresholds(environment, **_kwargs) -> None:
         environment.process_exit_code = 1
     else:
         print(f"LOCUST GATE PASSED: {total.num_requests} requests, p95 {total.get_response_time_percentile(0.95):.0f} ms")
+

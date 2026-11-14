@@ -39,3 +39,4 @@ Useful settings: `BASE_URL`, `ITERATIONS` (k6), `LATENCY_BUDGET_MS`, `MAX_FAIL_R
 - Percentile budgets per endpoint, stored as thresholds in version control.
 - Token-based metrics and cost per request once the agent uses a real model.
 - Results pushed to Grafana or another dashboard to compare runs over time.
+

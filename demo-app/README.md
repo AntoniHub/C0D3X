@@ -10,3 +10,4 @@ python demo-app/app.py --port 5000
 ```
 
 `DEMO_USER` and `DEMO_PASSWORD` set the valid login (fixture defaults for this local app only). The user `locked.user` is always rejected as locked. Every element exposes a `data-testid` so tests do not depend on layout or XPath.
+

@@ -32,3 +32,4 @@ class AgentConfig:
         if variant not in VARIANTS:
             raise ValueError(f"AGENT_VARIANT must be one of {VARIANTS}, got {variant!r}")
         return AgentConfig(mode=mode, variant=variant)
+

@@ -37,3 +37,4 @@ class InventoryPage:
     def logout(self) -> None:
         self.logout_link.click()
         expect(self.page).to_have_url(re.compile(r"/login$"))
+

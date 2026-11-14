@@ -214,3 +214,4 @@ jobs:
           print("Suite status:", status)
           sys.exit(0 if status == "PASS" else 1)
           PY
+

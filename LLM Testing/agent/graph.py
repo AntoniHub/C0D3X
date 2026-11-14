@@ -89,3 +89,4 @@ def build_graph(config: AgentConfig):
         graph.add_conditional_edges("agent", after_agent, {"tools": "tools", END: END})
 
     return graph.compile()
+

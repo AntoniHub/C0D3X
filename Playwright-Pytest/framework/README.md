@@ -41,3 +41,4 @@ playwright show-trace reports/artifacts/<failed-test>/*.zip
 ```
 
 CI runs the suite on Chromium and Firefox every day and on every change: see [`ui-tests.yml`](../../.github/workflows/ui-tests.yml).
+

@@ -25,3 +25,4 @@ class CheckoutPage(BasePage):
 
     def confirmation(self) -> str:
         return self.text_of(self.COMPLETE)
+

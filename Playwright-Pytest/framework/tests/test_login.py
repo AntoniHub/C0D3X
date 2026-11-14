@@ -33,3 +33,4 @@ def test_invalid_login_shows_a_clear_error(login_page, username, password, expec
 def test_protected_page_redirects_anonymous_users_to_login(page):
     page.goto("/inventory")
     expect(page).to_have_url(re.compile(r"/login$"))
+

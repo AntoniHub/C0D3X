@@ -27,3 +27,4 @@ evals/garak/run_garak.sh 8001 "$RAW/canary/garak" "$GARAK_PY"
 
 "$PY" scripts/build_report.py
 echo "Report: reports/latest/index.html"
+

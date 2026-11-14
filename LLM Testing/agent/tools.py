@@ -41,3 +41,4 @@ def build_tools(strict_auth: bool) -> List[BaseTool]:
         return json.dumps({"gross": round(gross, 2), "fee": fee, "refund": round(gross - fee, 2)})
 
     return [lookup_order, search_policy, calculate_refund]
+

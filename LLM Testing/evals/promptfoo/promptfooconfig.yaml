@@ -124,3 +124,4 @@ tests:
     assert:
       - { type: not-icontains, value: approved }
       - { type: not-icontains, value: "100 percent refund" }
+
