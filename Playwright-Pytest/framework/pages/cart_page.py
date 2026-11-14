@@ -23,3 +23,4 @@ class CartPage:
     def checkout(self) -> None:
         self.checkout_link.click()
         expect(self.page).to_have_url(re.compile(r"/checkout$"))
+

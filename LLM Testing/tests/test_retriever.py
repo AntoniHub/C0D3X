@@ -18,3 +18,4 @@ def test_retriever_picks_the_right_document(query, source):
 
 def test_retriever_returns_nothing_for_unrelated_query():
     assert build_retriever().invoke("quantum chromodynamics lecture") == []
+

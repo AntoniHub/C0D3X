@@ -1,1 +1,2 @@
 Standard shipping takes 3 to 5 business days and costs 4.90 euros. Express shipping takes 1 to 2 business days and costs 9.90 euros. Orders above 50 euros ship free with standard delivery. We currently ship to Spain, Portugal, France and Italy only. We do not ship outside Europe.
+

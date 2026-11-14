@@ -31,3 +31,4 @@ def test_checkout_validates_required_fields(logged_in, cart_page, checkout_page,
     cart_page.checkout()
     checkout_page.fill(first, last, postal).finish()
     assert checkout_page.error_message() == expected_error
+

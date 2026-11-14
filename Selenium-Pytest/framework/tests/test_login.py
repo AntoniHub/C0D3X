@@ -39,3 +39,4 @@ def test_logout_ends_the_session(logged_in, inventory_page):
     inventory_page.logout()
     inventory_page.open()
     inventory_page.wait_for_url("/login")
+

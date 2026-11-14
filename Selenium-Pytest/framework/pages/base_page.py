@@ -56,3 +56,4 @@ class BasePage:
 
     def wait_for_url(self, fragment: str) -> None:
         self.wait.until(EC.url_contains(fragment))
+

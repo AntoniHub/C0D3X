@@ -48,3 +48,4 @@ def test_non_mock_mode_is_not_available_yet(monkeypatch):
     monkeypatch.setenv("AGENT_MODE", "ollama")
     with pytest.raises(ValueError):
         AgentConfig.from_env()
+

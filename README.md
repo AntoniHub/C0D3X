@@ -33,3 +33,4 @@ No credentials live in the code. The older suites read `QA_EMAIL`, `QA_API_PASSW
 * An automated endpoint test circuit makes the different API calls with the [requests](https://docs.python-requests.org/en/latest/index.html) library.
 * It connects with [Cloud Firestore](https://firebase.google.com/docs/firestore/quickstart?hl=es-419#python) to read identifiers that the API responses do not return, and to verify or delete the data it created.
 * Jenkins schedules the runs (freestyle project with a cron trigger).
+

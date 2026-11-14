@@ -121,3 +121,4 @@ class GroundednessMetric(_SimpleMetric):
         self.success = self.score >= self.threshold
         self.reason = f"{self.score:.0%} of answer terms are supported by the retrieved context"
         return self.score
+

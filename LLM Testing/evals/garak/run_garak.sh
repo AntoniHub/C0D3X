@@ -31,3 +31,4 @@ for line in open(sys.argv[1], encoding="utf-8"):
         state = "PASS" if entry["passed"] == entry["total_evaluated"] else "FAIL"
         print(f'{state}  {entry["probe"]:<34} {entry["detector"]:<36} {entry["passed"]}/{entry["total_evaluated"]}')
 PY
+

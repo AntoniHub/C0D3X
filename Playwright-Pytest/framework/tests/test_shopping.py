@@ -71,3 +71,4 @@ def test_checkout_validates_required_fields(inventory, cart, checkout, first, la
     cart.checkout()
     checkout.fill(first, last, postal).finish()
     checkout.expect_error(expected_error)
+

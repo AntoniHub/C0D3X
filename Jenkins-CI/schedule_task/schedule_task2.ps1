@@ -16,3 +16,4 @@ while ($true) {
     # Espera 1 minuto antes de verificar nuevamente
     Start-Sleep -Seconds 60
 }
+

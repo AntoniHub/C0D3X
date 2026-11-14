@@ -38,3 +38,4 @@ def test_products_can_be_sorted_by_price(logged_in):
 def test_products_are_sorted_by_name_by_default(logged_in):
     names = logged_in.product_names()
     assert names == sorted(names)
+

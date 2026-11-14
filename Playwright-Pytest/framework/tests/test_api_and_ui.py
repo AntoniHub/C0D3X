@@ -36,3 +36,4 @@ def test_network_failure_on_add_to_cart_is_visible_to_the_user(auth_page, invent
     auth_page.route("**/cart/add/*", lambda route: route.fulfill(status=500, body="Service unavailable"))
     auth_page.get_by_test_id("add-1").click()
     expect(auth_page.locator("body")).to_have_text("Service unavailable")
+

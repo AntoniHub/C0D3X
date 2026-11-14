@@ -30,3 +30,4 @@ def test_calculate_refund_with_fee():
     calc = tool_by_name(build_tools(strict_auth=True), "calculate_refund")
     result = json.loads(calc.invoke({"item_price": 100, "quantity": 1, "restocking_fee_percent": 10}))
     assert result == {"gross": 100.0, "fee": 10.0, "refund": 90.0}
+

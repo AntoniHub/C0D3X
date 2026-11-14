@@ -80,3 +80,4 @@ def test_golden_case(case, client):
                 ],
             },
         )
+

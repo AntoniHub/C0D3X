@@ -15,3 +15,4 @@ def results_dir() -> Path:
 def record(suite: str, row: dict) -> None:
     with open(results_dir() / f"{suite}.jsonl", "a", encoding="utf-8") as handle:
         handle.write(json.dumps(row, ensure_ascii=False) + "\n")
+

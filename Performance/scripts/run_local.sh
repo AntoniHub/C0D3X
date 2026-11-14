@@ -26,3 +26,4 @@ k6 run k6/chat-latency.js || status=1
 "$PY" -m locust -f locust/locustfile.py --headless -u 1 -r 1 -t 6s \
   --host "${BASE_URL}" --html reports/locust.html --csv reports/locust || status=1
 exit ${status}
+
