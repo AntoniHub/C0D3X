@@ -1,0 +1,216 @@
+# LLM Testing: automated evaluation of a LangChain/LangGraph support agent.
+# Runs on every push and pull request that touches "LLM Testing", every day at 12:00 UTC,
+# and on demand. Scheduled and manual runs on master also commit the HTML report.
+#
+# Built by QA Engineer | Antonio Rodriguez Farias
+
+name: LLM Testing | QA Engineer | Antonio Rodriguez Farias
+
+on:
+  push:
+    paths:
+      - "LLM Testing/**"
+      - ".github/workflows/llm-testing.yml"
+      - "!LLM Testing/reports/**"
+  pull_request:
+    paths:
+      - "LLM Testing/**"
+      - ".github/workflows/llm-testing.yml"
+  schedule:
+    - cron: "0 12 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: llm-testing-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name != 'schedule' && github.event_name != 'workflow_dispatch' }}
+
+env:
+  AGENT_MODE: mock
+  DEEPEVAL_TELEMETRY_OPT_OUT: "YES"
+  PROMPTFOO_DISABLE_TELEMETRY: "1"
+  PROMPTFOO_DISABLE_UPDATE: "1"
+  PROMPTFOO_DISABLE_SHARING: "1"
+  PROMPTFOO_VERSION: "0.125.1"
+
+defaults:
+  run:
+    working-directory: LLM Testing
+
+jobs:
+  evals:
+    name: Unit tests, DeepEval and Promptfoo
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: LLM Testing/requirements.txt
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Start the hardened agent (:8000) and the vulnerable one (:8001)
+        run: scripts/start_agents.sh python
+
+      - name: Unit tests
+        continue-on-error: true
+        run: python -m pytest -q --junitxml=reports/raw/unit.xml
+
+      - name: DeepEval against the hardened agent
+        continue-on-error: true
+        env:
+          AGENT_URL: http://127.0.0.1:8000
+          EVAL_RESULTS_DIR: reports/raw
+        run: python -m pytest evals/deepeval -q
+
+      - name: DeepEval against the vulnerable agent (detection check)
+        continue-on-error: true
+        env:
+          AGENT_URL: http://127.0.0.1:8001
+          EVAL_RESULTS_DIR: reports/raw/canary
+        run: python -m pytest evals/deepeval -q
+
+      - name: Promptfoo against the hardened agent
+        continue-on-error: true
+        env:
+          AGENT_URL: http://127.0.0.1:8000
+        run: >
+          npx --yes promptfoo@${PROMPTFOO_VERSION} eval
+          -c evals/promptfoo/promptfooconfig.yaml
+          --no-cache --no-progress-bar --no-table
+          -o reports/raw/promptfoo.json
+
+      - name: Promptfoo against the vulnerable agent (detection check)
+        continue-on-error: true
+        env:
+          AGENT_URL: http://127.0.0.1:8001
+        run: >
+          npx --yes promptfoo@${PROMPTFOO_VERSION} eval
+          -c evals/promptfoo/promptfooconfig.yaml
+          --no-cache --no-progress-bar --no-table
+          -o reports/raw/canary/promptfoo.json
+
+      - name: Upload raw results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: raw-evals
+          path: LLM Testing/reports/raw
+          retention-days: 7
+
+  garak:
+    name: Garak vulnerability scan
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: LLM Testing/requirements*.txt
+
+      - name: Install the agent dependencies
+        run: pip install -r requirements.txt
+
+      - name: Install Garak in its own virtual environment
+        run: |
+          python -m venv .venv-garak
+          .venv-garak/bin/pip install -r requirements-garak.txt
+
+      - name: Start the hardened agent (:8000) and the vulnerable one (:8001)
+        run: scripts/start_agents.sh python
+
+      - name: Garak against the hardened agent
+        continue-on-error: true
+        run: evals/garak/run_garak.sh 8000 reports/raw/garak .venv-garak/bin/python
+
+      - name: Garak against the vulnerable agent (detection check)
+        continue-on-error: true
+        run: evals/garak/run_garak.sh 8001 reports/raw/canary/garak .venv-garak/bin/python
+
+      - name: Upload raw results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: raw-garak
+          path: |
+            LLM Testing/reports/raw/garak/*.jsonl
+            LLM Testing/reports/raw/canary/garak/*.jsonl
+          retention-days: 7
+
+  report:
+    name: Build report
+    needs: [evals, garak]
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Download raw results
+        uses: actions/download-artifact@v4
+        with:
+          pattern: raw-*
+          path: LLM Testing/reports/raw
+          merge-multiple: true
+
+      - name: Build the HTML report
+        env:
+          RECORD: ${{ (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/master' }}
+        run: |
+          if [ "$RECORD" = "true" ]; then
+            python scripts/build_report.py --record-history --update-readme
+          else
+            python scripts/build_report.py
+          fi
+          cat reports/latest/summary.md >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload the report
+        uses: actions/upload-artifact@v4
+        with:
+          name: llm-testing-report
+          path: LLM Testing/reports/latest
+          retention-days: 30
+
+      - name: Commit the daily report
+        if: github.ref == 'refs/heads/master' && (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch')
+        working-directory: .
+        run: |
+          git config user.name "Antonio Rodriguez Farias"
+          git config user.email "abgrodriguezfarias@gmail.com"
+          git add "LLM Testing/reports/latest" "LLM Testing/reports/history.json" "LLM Testing/reports/archive" "LLM Testing/README.md"
+          if git diff --cached --quiet; then
+            echo "Nothing to commit"
+          else
+            git commit -m "QA Engineer | Antonio Rodriguez Farias"
+            git pull --rebase origin master
+            git push origin HEAD:master
+          fi
+
+      - name: Fail the run if the suite is red
+        run: |
+          python - <<'PY'
+          import json, sys
+          status = json.load(open("reports/latest/summary.json"))["verdict"]["status"]
+          print("Suite status:", status)
+          sys.exit(0 if status == "PASS" else 1)
+          PY
