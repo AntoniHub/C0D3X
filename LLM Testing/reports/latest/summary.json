@@ -1,0 +1,67 @@
+{
+  "context": {
+    "date": "2026-11-14 17:40 UTC",
+    "day": "2026-11-14",
+    "trigger": "schedule",
+    "branch": "master",
+    "sha": "e8116d4",
+    "run_id": "43622115230",
+    "run_url": "https://github.com/AntoniHub/C0D3X/actions/runs/43622115230"
+  },
+  "verdict": {
+    "suites_ok": {
+      "unit": true,
+      "deepeval": true,
+      "promptfoo": true,
+      "garak": true
+    },
+    "detection": {
+      "deepeval": {
+        "total": 21,
+        "failed": 5,
+        "detected": true,
+        "missing": false
+      },
+      "promptfoo": {
+        "total": 14,
+        "failed": 6,
+        "detected": true,
+        "missing": false
+      },
+      "garak": {
+        "total": 7,
+        "failed": 5,
+        "detected": true,
+        "missing": false
+      }
+    },
+    "detection_ok": true,
+    "status": "PASS"
+  },
+  "entry": {
+    "date": "2026-11-14 17:40 UTC",
+    "day": "2026-11-14",
+    "trigger": "schedule",
+    "sha": "e8116d4",
+    "status": "PASS",
+    "detection_ok": true,
+    "suites": {
+      "unit": [
+        20,
+        20
+      ],
+      "deepeval": [
+        21,
+        21
+      ],
+      "promptfoo": [
+        14,
+        14
+      ],
+      "garak": [
+        7,
+        7
+      ]
+    }
+  }
+}
