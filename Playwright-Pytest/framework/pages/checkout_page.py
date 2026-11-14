@@ -25,3 +25,4 @@ class CheckoutPage:
 
     def expect_confirmation(self) -> None:
         expect(self.complete).to_have_text("Thank you for your order")
+

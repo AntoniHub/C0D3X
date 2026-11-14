@@ -20,3 +20,4 @@ class LoginPage:
 
     def expect_error(self, message: str) -> None:
         expect(self.error).to_have_text(message)
+

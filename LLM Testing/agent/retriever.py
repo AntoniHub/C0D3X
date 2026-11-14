@@ -57,3 +57,4 @@ class PolicyRetriever(BaseRetriever):
 
 def build_retriever() -> PolicyRetriever:
     return PolicyRetriever(docs=load_documents())
+

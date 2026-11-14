@@ -39,3 +39,4 @@ class AgentClient:
         response = self.http.get(f"{self.base_url}/health")
         response.raise_for_status()
         return response.json()
+

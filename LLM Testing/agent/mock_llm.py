@@ -160,3 +160,4 @@ class ScriptedSupportModel(BaseChatModel):
             )
 
         return AIMessage(content=FALLBACK)
+

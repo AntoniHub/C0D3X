@@ -44,3 +44,4 @@ class InventoryPage(BasePage):
     def logout(self):
         self.click(self.LOGOUT)
         self.wait_for_url("/login")
+

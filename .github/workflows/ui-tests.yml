@@ -102,3 +102,4 @@ jobs:
           path: Playwright-Pytest/framework/reports
           if-no-files-found: ignore  # nothing is written when every test passes
           retention-days: 7
+

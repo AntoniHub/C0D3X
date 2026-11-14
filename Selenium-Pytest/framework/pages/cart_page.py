@@ -24,3 +24,4 @@ class CartPage(BasePage):
     def checkout(self):
         self.click(self.CHECKOUT)
         self.wait_for_url("/checkout")
+

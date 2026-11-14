@@ -106,3 +106,4 @@ export function handleSummary(data) {
     "reports/k6-summary.json": JSON.stringify(data, null, 2),
   };
 }
+

@@ -16,3 +16,4 @@ class LoginPage(BasePage):
 
     def error_message(self) -> str:
         return self.text_of(self.ERROR)
+

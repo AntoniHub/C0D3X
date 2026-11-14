@@ -40,3 +40,4 @@ BASE_URL=https://staging.example.com pytest
 ```
 
 The HTML report is written to `reports/report.html`. CI runs the suite on Chrome and Firefox every day and on every change: see [`ui-tests.yml`](../../.github/workflows/ui-tests.yml).
+
