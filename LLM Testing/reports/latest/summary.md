@@ -1,6 +1,6 @@
 ### LLM Testing: PASS
 
-Run: 2026-11-16 21:39 UTC | trigger: schedule | commit: `e2713f8`
+Run: 2026-11-17 20:29 UTC | trigger: schedule | commit: `8726c82`
 
 | Suite (hardened agent) | Passed | Rate | Result |
 |---|---|---|---|
