@@ -103,7 +103,7 @@ jobs:
 
       - name: Upload raw results
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: raw-evals
           path: LLM Testing/reports/raw
@@ -143,7 +143,7 @@ jobs:
 
       - name: Upload raw results
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: raw-garak
           path: |
@@ -185,7 +185,7 @@ jobs:
           cat reports/latest/summary.md >> "$GITHUB_STEP_SUMMARY"
 
       - name: Upload the report
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: llm-testing-report
           path: LLM Testing/reports/latest

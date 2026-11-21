@@ -60,7 +60,7 @@ jobs:
 
       - name: Upload report and failure evidence
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: selenium-${{ matrix.browser }}
           path: Selenium-Pytest/framework/reports
@@ -96,7 +96,7 @@ jobs:
 
       - name: Upload traces, videos and screenshots
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: playwright-${{ matrix.browser }}
           path: Playwright-Pytest/framework/reports
