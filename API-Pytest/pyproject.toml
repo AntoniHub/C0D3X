@@ -1,0 +1,64 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "weather-client"
+version = "0.1.0"
+description = "Typed client and automated tests for the OpenWeather current weather endpoint"
+requires-python = ">=3.11"
+dependencies = [
+    "requests>=2.32,<3",
+    "pydantic>=2.7,<3",
+    "pydantic-settings>=2.3,<3",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.2,<9",
+    "pytest-cov>=5,<7",
+    "pytest-html>=4.1,<5",
+    "responses>=0.25,<1",
+    "jsonschema>=4.22,<5",
+    "ruff>=0.5",
+    "mypy>=1.10",
+    "types-requests",
+    "types-jsonschema",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+minversion = "8.0"
+testpaths = ["tests"]
+addopts = "-ra --strict-markers --strict-config --html=reports/report.html --self-contained-html"
+markers = [
+    "live: calls the real OpenWeather API and consumes quota",
+    "mocked: runs fully offline against stubbed HTTP responses",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "SIM", "S", "N", "C4", "PT", "RET", "ARG", "PTH", "TID"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["S101"]
+
+[tool.mypy]
+strict = true
+python_version = "3.11"
+plugins = ["pydantic.mypy"]
+files = ["src", "tests"]
+
+[[tool.mypy.overrides]]
+module = ["responses.*"]
+ignore_missing_imports = true
+
+[tool.coverage.run]
+source = ["weather_client"]
+branch = true

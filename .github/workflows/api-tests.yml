@@ -1,0 +1,112 @@
+# API tests: a typed client for a public weather API, tested offline (stubbed HTTP) and live (real endpoint).
+# The offline job needs no secrets. The live job reads OWM_API_KEY from the repository secrets and its
+# tests skip cleanly when the secret is not set.
+#
+# Built by QA Engineer | Antonio Rodriguez Farias
+
+name: API Tests | Python and pytest | QA Engineer | Antonio Rodriguez Farias
+
+on:
+  push:
+    paths:
+      - "API-Pytest/**"
+      - ".github/workflows/api-tests.yml"
+  pull_request:
+    paths:
+      - "API-Pytest/**"
+      - ".github/workflows/api-tests.yml"
+  schedule:
+    - cron: "0 15 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: api-tests-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name != 'schedule' && github.event_name != 'workflow_dispatch' }}
+
+jobs:
+  offline:
+    name: API tests (offline)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: API-Pytest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: API-Pytest/pyproject.toml
+
+      - name: Install dependencies
+        run: pip install -e ".[dev]"
+
+      - name: Lint and format check
+        run: ruff check . && ruff format --check .
+
+      - name: Type check
+        run: mypy
+
+      - name: Run offline tests
+        run: pytest -m "not live" --cov --cov-report=term-missing --cov-fail-under=90 --junitxml=reports/api-offline.xml
+
+      - name: Publish summary
+        if: always()
+        run: python scripts/junit_summary.py "API tests (offline)" reports/api-offline.xml >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload results
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: api-offline-results
+          path: API-Pytest/reports
+          if-no-files-found: ignore
+          retention-days: 7
+
+  live:
+    name: API tests (live)
+    if: github.event_name != 'pull_request'
+    needs: offline
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: API-Pytest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: API-Pytest/pyproject.toml
+
+      - name: Install dependencies
+        run: pip install -e ".[dev]"
+
+      - name: Run live tests
+        env:
+          OWM_API_KEY: ${{ secrets.OWM_API_KEY }}
+        run: pytest -m live -rs -o addopts="--strict-markers --strict-config" --junitxml=reports/api-live.xml
+
+      - name: Publish summary
+        if: always()
+        run: python scripts/junit_summary.py "API tests (live)" reports/api-live.xml >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload results
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: api-live-results
+          path: API-Pytest/reports/api-live.xml
+          if-no-files-found: ignore
+          retention-days: 7
