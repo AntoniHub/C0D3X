@@ -35,6 +35,9 @@ the code-reviewer and security-reviewer subagents and fix what they report.
 No emojis anywhere: code, comments, docs, commits or output.
 
 ## Git
+- Before writing or extending code, run git fetch and check whether the working
+  branch and the default branch (main or master) have new commits on the remote;
+  if so, sync or tell the user before starting.
 - Never run git commit or git push unless the user explicitly asks for it in
   that message.
 - Never add Co-Authored-By trailers or "Generated with Claude" lines to commits
