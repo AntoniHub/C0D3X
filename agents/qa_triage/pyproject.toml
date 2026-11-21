@@ -1,0 +1,56 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "qa-triage"
+version = "0.1.0"
+description = "Classifies failed test runs and drafts the issue, calling the model only for judgement"
+requires-python = ">=3.11"
+dependencies = [
+    "anthropic>=1,<2",
+    "pydantic>=2.7,<3",
+    "defusedxml>=0.7,<1",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.2,<9",
+    "pytest-cov>=5,<7",
+    "ruff>=0.5",
+    "mypy>=1.10",
+    "types-defusedxml",
+]
+
+[project.scripts]
+qa-triage = "qa_triage.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+minversion = "8.0"
+testpaths = ["tests"]
+addopts = "-ra --strict-markers --strict-config"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "SIM", "S", "N", "C4", "PT", "RET", "ARG", "PTH", "TID"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["S101"]
+
+[tool.mypy]
+strict = true
+python_version = "3.11"
+plugins = ["pydantic.mypy"]
+files = ["src", "tests"]
+
+[tool.coverage.run]
+source = ["qa_triage"]
+branch = true
+omit = ["*/__main__.py"]

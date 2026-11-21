@@ -1,0 +1,14 @@
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: weekly
+  - package-ecosystem: pip
+    directory: "/API-Pytest"
+    schedule:
+      interval: weekly
+  - package-ecosystem: pip
+    directory: "/agents/qa_triage"
+    schedule:
+      interval: weekly

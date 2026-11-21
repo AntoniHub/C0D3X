@@ -1,0 +1,10 @@
+line-length = 100
+target-version = "py311"
+
+[lint]
+select = ["E", "F", "W", "I", "B", "UP", "SIM", "S", "N", "C4", "PT", "RET", "ARG", "PTH"]
+
+[lint.per-file-ignores]
+"test_hooks.py" = ["S101", "S603"]
+"secret_guard.py" = ["S105"]
+"format_python.py" = ["S603"]
