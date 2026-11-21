@@ -41,7 +41,7 @@ jobs:
           date >> file.txt
 
       - name: Upload Figlet File
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: file
           path: legacy/Jenkins-CI/file.txt
