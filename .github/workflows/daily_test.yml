@@ -23,7 +23,7 @@ jobs:
         python-version: ["3.10"]
     defaults:
       run:
-        working-directory: Jenkins-CI
+        working-directory: legacy/Jenkins-CI
     env:
       GH_TOKEN: ${{ secrets.PAT }}
       API_KEY: ${{ secrets.API_KEY }}
@@ -44,7 +44,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: file
-          path: Jenkins-CI/file.txt
+          path: legacy/Jenkins-CI/file.txt
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v6
