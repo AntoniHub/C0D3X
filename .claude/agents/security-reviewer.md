@@ -1,6 +1,6 @@
 ---
 name: security-reviewer
-description: Reviews code, configuration and CI workflows for vulnerabilities and security gaps before they reach the repository. Use proactively on every change, before a task is reported as done. The caller must name the files or paste the diff to review.
+description: Reviews code, configuration and CI workflows for vulnerabilities and security gaps before they reach the repository. Use when the user asks for a security review. The caller must name the files or paste the diff to review.
 tools: Read, Grep, Glob
 model: sonnet
 effort: medium

@@ -1,6 +1,6 @@
 ---
 name: code-reviewer
-description: Reviews code against the global rules and market standards (clean code, language idioms, QA best practices). Use proactively after code is written or modified, before a task is reported as done. The caller must name the files or paste the diff to review.
+description: Reviews code against the global rules and market standards (clean code, language idioms, QA best practices). Use when the user asks for a code review. The caller must name the files or paste the diff to review.
 tools: Read, Grep, Glob
 model: haiku
 effort: medium

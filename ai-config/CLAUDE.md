@@ -12,16 +12,10 @@ failure modes and testability before writing code.
   reuse instead of duplicating.
 - Explicit types where the language supports them; no dead code or magic values.
 - Validate input at boundaries; handle errors explicitly; never swallow exceptions.
-- Security: no secrets, tokens or personal data in code, logs, fixtures or
-  reports; parameterised queries; least privilege; audited dependencies.
 - Prefer clear names over comments; follow the project's linter and formatter;
   add or update tests with every change.
 - Before declaring a task done, run the project's checks (lint, types, tests)
   and report the real result, failures included.
-
-## Review gate
-Before reporting a non-trivial task as finished, delegate the changed files to
-the code-reviewer and security-reviewer subagents and fix what they report.
 
 ## Comments
 - Default: none. Add one only when the code cannot express the reason, or when
