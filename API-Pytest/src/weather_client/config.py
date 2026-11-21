@@ -16,6 +16,13 @@ class Settings(BaseSettings):
         default=10.0, gt=0, le=MAX_TIMEOUT_SECONDS, allow_inf_nan=False
     )
 
+    @field_validator("owm_api_key", mode="before")
+    @classmethod
+    def blank_key_is_missing(cls, value: object) -> object:
+        if isinstance(value, str) and not value.strip():
+            return None
+        return value
+
     @field_validator("owm_base_url")
     @classmethod
     def require_https(cls, value: str) -> str:

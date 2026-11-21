@@ -108,7 +108,7 @@ Paths relative to `API-Pytest/`. Status "Auto" means a test exists today; ids ar
 | TC-API-036 | Live missing location gives 400 | Live | tests/live/test_current_weather_live.py::test_request_without_location_is_rejected | Auto |
 | TC-API-037 | Live out-of-range latitude gives 400 | Live | tests/live/test_current_weather_live.py::test_out_of_range_latitude_is_rejected | Auto |
 | TC-API-038 | Live typed client call returns parsed model | Live | tests/live/test_current_weather_live.py::test_client_returns_a_typed_result_from_the_real_api | Auto |
-| TC-API-039 | Live tests skip cleanly without key | Live | none (behaviour in `tests/live/conftest.py::api_key`, never asserted) | Not automated |
+| TC-API-039 | Live tests skip cleanly without key; a blank key (empty secret in CI) counts as missing | Live | tests/mocked/test_settings.py::test_blank_api_key_counts_as_missing (the skip in `tests/live/conftest.py::api_key` is not asserted directly) | Partial |
 | TC-API-040 | Schema negative cases (schema rejects bad payloads) | Contract | none | Not automated |
 | TC-API-041 | Key absent from JUnit/HTML reports | Process | none (manual artifact review) | Not automated |
 | TC-API-042 | `Settings` defaults are safe; rejects non-https base URL and timeouts that are zero, negative, above 60 s or not finite; normalises the base URL | Unit | tests/mocked/test_settings.py::test_defaults_are_safe, ::test_rejects_unreasonable_timeouts, ::test_rejects_non_https_base_url, ::test_base_url_is_normalised | Auto |

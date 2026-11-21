@@ -45,6 +45,22 @@ def test_rejects_base_urls_that_are_not_https_with_a_host(url: str) -> None:
     assert rejected_fields(owm_base_url=url) == ["owm_base_url"]
 
 
+@pytest.mark.parametrize("value", ["", "   "])
+def test_blank_api_key_counts_as_missing(value: str, monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setenv("OWM_API_KEY", value)
+
+    assert build().owm_api_key is None
+    assert build(owm_api_key=value).owm_api_key is None
+
+
+def test_a_real_api_key_is_kept_and_hidden_from_repr() -> None:
+    settings = build(owm_api_key="abc123")
+
+    assert settings.owm_api_key is not None
+    assert settings.owm_api_key.get_secret_value() == "abc123"
+    assert "abc123" not in repr(settings)
+
+
 def test_base_url_is_normalised() -> None:
     assert (
         build(owm_base_url="https://api.example.com/v1/").owm_base_url
