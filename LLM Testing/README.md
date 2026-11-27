@@ -40,7 +40,7 @@ The agent itself is deliberately simple and runs on a scripted mock model. The g
 <!-- LATEST-RUN:START -->
 ### LLM Testing: PASS
 
-Run: 2026-11-26 20:56 UTC | trigger: schedule | commit: `db6fa1c`
+Run: 2026-11-27 20:41 UTC | trigger: schedule | commit: `31dd900`
 
 | Suite (hardened agent) | Passed | Rate | Result |
 |---|---|---|---|
